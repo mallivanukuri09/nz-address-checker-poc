@@ -386,13 +386,6 @@ export default function Dashboard() {
                     >
                       Back to address search
                     </button>
-                    <button
-                      type="button"
-                      onClick={handleClear}
-                      className="text-sm text-blue-600 hover:text-blue-700 cursor-pointer"
-                    >
-                      Clear
-                    </button>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
