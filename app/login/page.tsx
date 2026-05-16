@@ -77,7 +77,7 @@ export default function Login() {
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center">
       <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md">
-        <h1 className="text-3xl font-bold text-gray-900 text-center mb-8">Welcome Back</h1>
+        <h1 className="text-3xl font-bold text-gray-900 text-center mb-8">Kia Ora Aioi</h1>
         
         {error && (
           <div className="mb-6 bg-red-50 border border-red-200 rounded-lg p-4 flex items-center gap-3">
