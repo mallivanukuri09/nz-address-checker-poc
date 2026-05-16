@@ -1,0 +1,13 @@
+{
+  "addresses": [
+    {
+      "address_id": "123456",
+      "address_line_1": "100 Automation Way",
+      "suburb": "Testingville",
+      "city": "Quality City",
+      "postcode": "5000",
+      "full_address": "100 Automation Way, Testingville, Quality City 5000"
+    }
+  ],
+  "success": true
+}
