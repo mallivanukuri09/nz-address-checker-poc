@@ -89,7 +89,7 @@ export default function Dashboard() {
         } else {
           setSuggestions([]);
           setSuggestionObjects([]);
-          setSearchError('No matching address found, enter here manually.');
+          setSearchError('No matching address found');
         }
       } catch (error) {
         setSuggestions([]);
@@ -344,14 +344,8 @@ export default function Dashboard() {
                 </div>
               )}
               {searchError && !isApiOffline && (
-                <div className="bg-red-50 border border-red-200 rounded-lg p-4">
-                  {searchError === 'No matching address found, enter here manually.' ? (
-                    <p className="text-red-600 font-medium">
-                      No matching address found, <span onClick={handleManualEntry} className="underline cursor-pointer">Can't find your address? Enter manually</span>.
-                    </p>
-                  ) : (
-                    <p className="text-red-600 font-medium">{searchError}</p>
-                  )}
+                <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-3">
+                  <p className="text-red-600 font-medium">{searchError}</p>
                 </div>
               )}
               {!isApiOffline && !showManualFields && (

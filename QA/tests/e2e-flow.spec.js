@@ -125,4 +125,31 @@ test.describe('Aioi App - End-to-End User Flow', () => {
     await expect(page.locator('text="Please fix the errors above"')).not.toBeVisible();
   });
   
+  test('Verify address search failure state displays standalone error message', async ({ page }) => {
+    // Navigate and login
+    await page.goto('/login');
+    await page.locator('input#email').fill('admin@test.com');
+    await page.locator('input#password').fill('Admin123');
+    await page.locator('button[type="submit"]').click();
+
+    // Intercept with an empty mock response to simulate no results found
+    await page.route('**/api/address?q=*', async (route) => {
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({ addresses: [], success: true }),
+      });
+    });
+
+    // Search for an invalid address
+    const searchInput = page.locator('input#searchAddress');
+    await searchInput.fill('This Address Does Not Exist 9999');
+
+    // Assert the exact standalone error string is visible
+    await expect(page.locator('text=No matching address found')).toBeVisible();
+
+    // Assert the manual fallback link is still visible independently
+    await expect(page.locator('text="Can\'t find your address? Enter manually"')).toBeVisible();
+  });
+
 });
