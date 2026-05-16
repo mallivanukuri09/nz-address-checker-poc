@@ -111,7 +111,6 @@ export default function Dashboard() {
     setSuggestions([]);
     setSuggestionObjects([]);
     setSearchError('');
-    setShowManualFields(true);
 
     // Populate fields from the address object
     setStreetAddress(addressObj.address_line_1 || '');
@@ -348,7 +347,7 @@ export default function Dashboard() {
                 <div className="bg-red-50 border border-red-200 rounded-lg p-4">
                   {searchError === 'No matching address found, enter here manually.' ? (
                     <p className="text-red-600 font-medium">
-                      No matching address found, <span onClick={handleManualEntry} className="underline cursor-pointer">enter here manually</span>.
+                      No matching address found, <span onClick={handleManualEntry} className="underline cursor-pointer">Can't find your address? Enter manually</span>.
                     </p>
                   ) : (
                     <p className="text-red-600 font-medium">{searchError}</p>
@@ -360,7 +359,7 @@ export default function Dashboard() {
                   onClick={handleManualEntry}
                   className="text-sm text-blue-600 hover:text-blue-700 cursor-pointer"
                 >
-                  Enter address manually
+                  Can't find your address? Enter manually
                 </p>
               )}
               {!isApiOffline && suggestions.length > 0 && (

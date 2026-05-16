@@ -91,8 +91,17 @@ test.describe('Aioi App - End-to-End User Flow', () => {
     await suggestionButton.waitFor({ state: 'visible' });
     await suggestionButton.click();
 
-    // 8. Assert fields are auto-populated
-    // We cannot reliably assert exact string values if it's live data, so we check they are non-empty
+    // 8. Assert fields remain strictly HIDDEN after selection
+    await expect(page.locator('input#streetAddress')).toBeHidden();
+    await expect(page.locator('input#suburb')).toBeHidden();
+    await expect(page.locator('input#city')).toBeHidden();
+    await expect(page.locator('input#postcode')).toBeHidden();
+
+    // 9. Explicitly click the manual override link to reveal them
+    await page.locator('text="Can\'t find your address? Enter manually"').click();
+
+    // 10. Assert fields are now visible and auto-populated
+    await expect(page.locator('input#streetAddress')).toBeVisible();
     await expect(page.locator('input#streetAddress')).not.toBeEmpty();
     await expect(page.locator('input#suburb')).not.toBeEmpty();
     await expect(page.locator('input#city')).not.toBeEmpty();
