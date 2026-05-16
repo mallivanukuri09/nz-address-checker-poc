@@ -111,6 +111,7 @@ export default function Dashboard() {
     setSuggestions([]);
     setSuggestionObjects([]);
     setSearchError('');
+    setShowManualFields(true);
 
     // Populate fields from the address object
     setStreetAddress(addressObj.address_line_1 || '');
