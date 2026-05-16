@@ -24,6 +24,7 @@ export default function Dashboard() {
   const [isApiOffline, setIsApiOffline] = useState(false);
   const [showManualFields, setShowManualFields] = useState(false);
   const [formError, setFormError] = useState('');
+  const [formSuccess, setFormSuccess] = useState(false);
   const streetAddressRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -252,8 +253,8 @@ export default function Dashboard() {
       return;
     }
 
-    // Success - proceed with submission
-    alert('Form submitted successfully!');
+    // Success — show in-page success banner
+    setFormSuccess(true);
   };
 
   const postcodeRegex = /^\d{4}$/;
@@ -282,6 +283,28 @@ export default function Dashboard() {
         <div className="max-w-2xl mx-auto">
           <div className="bg-white rounded-lg shadow-lg p-8">
             <h2 className="text-2xl font-bold text-slate-900 mb-6">HomeAddress</h2>
+
+            {/* ── Inline success banner — appears below heading, above form fields ── */}
+            {formSuccess && (
+              <div
+                id="successBanner"
+                role="alert"
+                style={{ position: 'static' }}
+                className="mb-6 flex items-start gap-3 rounded-lg border border-green-200 bg-green-50 px-5 py-4"
+              >
+                {/* Checkmark icon */}
+                <span className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-green-100">
+                  <svg className="h-4 w-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                </span>
+                <div>
+                  <p className="font-semibold text-green-800">Form submitted successfully!</p>
+                  <p className="mt-0.5 text-sm text-green-700">Your address details have been recorded.</p>
+                </div>
+              </div>
+            )}
+
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>

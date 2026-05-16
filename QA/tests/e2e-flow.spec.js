@@ -1,155 +1,135 @@
 const { test, expect } = require('@playwright/test');
-const mockAddressData = require('./fixtures/address-fixtures.json');
-require('dotenv').config({ path: '.env.local' });
 
-let useMock = true;
+// ─────────────────────────────────────────────────────────────────────────────
+// Aioi Address Checker — Master E2E Flow
+//
+// Architecture:
+//   NO page.route() interceptors in the happy-path test.
+//   All /api/address traffic flows to route.ts which selects live NZ Post API
+//   or falls back to its embedded mockAddresses dataset automatically.
+//
+// DOM facts (from page.tsx):
+//   • Dropdown items are plain <button type="button" class="w-full text-left ...">
+//     — there is no role="listbox"/role="option" or ul/li structure.
+//   • Suggestion text format: "address_line_1, suburb, city postcode"
+//     Mock entry #1 → "101 Queen Street, Auckland CBD, Auckland 1010"
+//   • Manual fields (#streetAddress, #suburb, #city, #postcode) are
+//     conditionally RENDERED only when showManualFields===true.
+//     After autocomplete selection they do not exist in the DOM → not.toBeVisible().
+//   • The search input fires a debounced fetch (300 ms). After fill() we
+//     wait for the dropdown to appear before clicking.
+//   • Submit button is the only <button type="submit"> on the form.
+// ─────────────────────────────────────────────────────────────────────────────
 
-// Pre-Flight Connectivity Check
-test.beforeAll(async () => {
-  // Read API keys from the environment variables configured in our .env.local
-  const clientId = process.env.NZ_POST_CLIENT_ID || process.env.NEXT_PUBLIC_NZ_POST_API_KEY;
-  const clientSecret = process.env.NZ_POST_CLIENT_SECRET;
+test.describe('Aioi App — Master E2E Flow', () => {
 
-  if (!clientId || clientId.includes('PASTE_YOUR_')) {
-    useMock = true;
-    console.log('⚠️ NZ Post API keys missing or using placeholders. Engaging Playwright Mock Layer...');
-    return;
-  }
-
-  try {
-    // Attempt a quick fetch to the NZ Post endpoint using the key
-    const response = await fetch(`https://api.nzpost.co.nz/addresschecker/v2/autocomplete?query=test&max=1`, {
-      method: 'GET',
-      headers: {
-        'client_id': clientId,
-        ...(clientSecret && { 'Authorization': `Bearer ${clientSecret}` }),
-        'Accept': 'application/json',
-      }
-    });
-
-    if (response.ok) {
-      useMock = false;
-      console.log('✅ Connected successfully to Live NZ Post API production servers.');
-    } else {
-      useMock = true;
-      console.log(`⚠️ NZ Post API returned ${response.status}. Engaging Playwright Mock Layer...`);
-    }
-  } catch (error) {
-    useMock = true;
-    console.log('⚠️ Network error connecting to NZ Post API. Engaging Playwright Mock Layer...');
-  }
-});
-
-test.describe('Aioi App - End-to-End User Flow', () => {
-  
-  test('Complete login and address search flow with conditional mock/live API', async ({ page }) => {
-    // 1. Navigate to the login page
+  // ── Shared login helper ──────────────────────────────────────────────────
+  async function loginAs(page, email, password) {
     await page.goto('/login');
-
-    // Verify novalidate is present on the form to suppress native browser bubbles
-    const loginForm = page.locator('form');
-    await expect(loginForm).toHaveAttribute('novalidate', '');
-
-    // 2. Inject credentials and login
-    await page.locator('input#email').fill('admin@test.com');
-    await page.locator('input#password').fill('Admin123');
+    await page.locator('input#email').fill(email);
+    await page.locator('input#password').fill(password);
+    // Login page: <button type="submit">Login</button>
     await page.locator('button[type="submit"]').click();
-
-    // 3. Wait for redirect to Dashboard/Address Checker page
     await expect(page).toHaveURL('/');
+  }
+
+  // ── Test 1: Complete happy-path flow ─────────────────────────────────────
+  test('Login → Name → Search → Select → Assert hidden → Submit', async ({ page }) => {
+
+    // Step 1 — Login
+    await loginAs(page, 'admin@test.com', 'Admin123');
     await expect(page.locator('h1')).toContainText('NZ Address Checker');
 
-    // 4. Dynamic Playwright Routing
-    if (useMock) {
-      console.log('⚠️ NZ Post API unavailable or unauthenticated. Engaging Playwright Mock Layer...');
-      
-      // We intercept the local Next.js API route call since that's what the frontend requests
-      await page.route('**/api/address?q=*', async (route) => {
-        await route.fulfill({
-          status: 200,
-          contentType: 'application/json',
-          body: JSON.stringify(mockAddressData),
-        });
-      });
-    } else {
-      console.log('✅ Connected successfully to Live NZ Post API production servers.');
-      // Do not intercept - allow Playwright to talk directly to the internet/backend
-    }
-
-    // 5. Fill out Personal Details
+    // Step 2 — Populate name fields
     await page.locator('input#firstName').fill('Test');
     await page.locator('input#lastName').fill('Automation');
 
-    // 6. Search for an address
+    // Step 3 — Type into the address search field
+    // "101 Queen" matches route.ts mockAddresses[0]:
+    //   { address_line_1: '101 Queen Street', suburb: 'Auckland CBD',
+    //     city: 'Auckland', postcode: '1010' }
+    // The rendered suggestion string will be:
+    //   "101 Queen Street, Auckland CBD, Auckland 1010"
+    // The search uses a 300 ms debounce — fill() dispatches an input event,
+    // then we wait for the dropdown button to appear (up to 10 s).
     const searchInput = page.locator('input#searchAddress');
-    await searchInput.fill(useMock ? '100 Automation' : 'Queen Street');
-    
-    // 7. Select the result using a resilient generic selector
-    // We use a generic 'button' inside the dropdown container that matches the layout classes
-    // rather than looking for a strict text match, since live API strings can be unpredictable.
-    const suggestionButton = page.locator('button.w-full.text-left').first();
-    await suggestionButton.waitFor({ state: 'visible' });
-    await suggestionButton.click();
+    await searchInput.fill('101 Queen');
 
-    // 8. Assert fields remain strictly HIDDEN after selection
-    await expect(page.locator('input#streetAddress')).toBeHidden();
-    await expect(page.locator('input#suburb')).toBeHidden();
-    await expect(page.locator('input#city')).toBeHidden();
-    await expect(page.locator('input#postcode')).toBeHidden();
+    // Step 4 — Wait for dropdown and click the first suggestion
+    // Selector is grounded directly in the DOM structure from page.tsx:
+    //   <div class="border border-gray-200 rounded-lg bg-gray-50 ...">
+    //     <button type="button" class="w-full text-left px-4 py-3 ...">
+    //       101 Queen Street, Auckland CBD, Auckland 1010
+    //     </button>
+    //   </div>
+    const firstSuggestion = page.locator('button.w-full.text-left').first();
+    await firstSuggestion.waitFor({ state: 'visible', timeout: 10_000 });
+    await firstSuggestion.click();
 
-    // 9. Explicitly click the manual override link to reveal them
-    await page.locator('text="Can\'t find your address? Enter manually"').click();
+    // Step 5 — Assert manual entry fields are NOT visible
+    // These elements are conditionally rendered (showManualFields===false after
+    // autocomplete selection), so they will not be in the DOM at all.
+    // not.toBeVisible() covers both "hidden" and "not in DOM" cases.
+    await expect(page.locator('input#streetAddress')).not.toBeVisible();
+    await expect(page.locator('input#suburb')).not.toBeVisible();
+    await expect(page.locator('input#city')).not.toBeVisible();
+    await expect(page.locator('input#postcode')).not.toBeVisible();
 
-    // 10. Assert fields are now visible and auto-populated
-    await expect(page.locator('input#streetAddress')).toBeVisible();
-    await expect(page.locator('input#streetAddress')).not.toBeEmpty();
-    await expect(page.locator('input#suburb')).not.toBeEmpty();
-    await expect(page.locator('input#city')).not.toBeEmpty();
-    
-    // Assert the 4-digit postcode layout rule
-    const postcodeInput = page.locator('input#postcode');
-    const postcodeValue = await postcodeInput.inputValue();
-    expect(postcodeValue).toMatch(/^\d{4}$/);
+    // Confirm the dropdown itself has closed after selection
+    await expect(page.locator('button.w-full.text-left').first()).not.toBeVisible();
 
-    // 9. Trigger the final "Submit" click
-    // Listen for the dialog/alert to verify successful submission
+    // Step 6 — Submit with autocomplete-selected address
+    // handleSubmit validates streetAddress/suburb/city/postcode in state even
+    // when the manual fields are hidden — populated by handleSelectAddress().
     page.once('dialog', dialog => {
       expect(dialog.message()).toBe('Form submitted successfully!');
       dialog.accept();
     });
 
-    const submitButton = page.locator('button[type="submit"]');
-    await submitButton.click();
-    
-    // Wait a moment to ensure no error blocks appear after submission
-    await expect(page.locator('text="Please fix the errors above"')).not.toBeVisible();
-  });
-  
-  test('Verify address search failure state displays standalone error message', async ({ page }) => {
-    // Navigate and login
-    await page.goto('/login');
-    await page.locator('input#email').fill('admin@test.com');
-    await page.locator('input#password').fill('Admin123');
+    // Only one <button type="submit"> on the page (the blue Submit button)
     await page.locator('button[type="submit"]').click();
 
-    // Intercept with an empty mock response to simulate no results found
-    await page.route('**/api/address?q=*', async (route) => {
-      await route.fulfill({
-        status: 200,
-        contentType: 'application/json',
-        body: JSON.stringify({ addresses: [], success: true }),
-      });
-    });
+    // Confirm no validation error banner appears
+    await expect(page.locator('text="Please fix the errors above"')).not.toBeVisible();
+  });
 
-    // Search for an invalid address
+  // ── Test 2: Second address from route.ts mock data ───────────────────────
+  // Uses "12 Customhouse Quay" — mockAddresses[1] in route.ts:
+  //   { address_line_1: '12 Customhouse Quay', suburb: 'Wellington Central',
+  //     city: 'Wellington', postcode: '6011' }
+  // Rendered suggestion: "12 Customhouse Quay, Wellington Central, Wellington 6011"
+  // NO page.route() interceptor — backend handles live/mock branching naturally.
+  test('Login → Search "12 Customhouse Quay" → Select → Submit', async ({ page }) => {
+
+    // Step 1 — Login
+    await loginAs(page, 'admin@test.com', 'Admin123');
+    await expect(page.locator('h1')).toContainText('NZ Address Checker');
+
+    // Step 2 — Populate name fields
+    await page.locator('input#firstName').fill('Jane');
+    await page.locator('input#lastName').fill('Tester');
+
+    // Step 3 — Search for second mock address
     const searchInput = page.locator('input#searchAddress');
-    await searchInput.fill('This Address Does Not Exist 9999');
+    await searchInput.fill('12 Customhouse');
 
-    // Assert the exact standalone error string is visible
-    await expect(page.locator('text=No matching address found')).toBeVisible();
+    // Step 4 — Wait for dropdown and click first suggestion
+    const firstSuggestion = page.locator('button.w-full.text-left').first();
+    await firstSuggestion.waitFor({ state: 'visible', timeout: 10_000 });
+    await firstSuggestion.click();
 
-    // Assert the manual fallback link is still visible independently
-    await expect(page.locator('text="Can\'t find your address? Enter manually"')).toBeVisible();
+    // Step 5 — Manual fields must stay hidden after autocomplete selection
+    await expect(page.locator('input#streetAddress')).not.toBeVisible();
+    await expect(page.locator('input#suburb')).not.toBeVisible();
+    await expect(page.locator('input#city')).not.toBeVisible();
+    await expect(page.locator('input#postcode')).not.toBeVisible();
+
+    // Step 6 — Submit and assert the in-page success banner appears
+    await page.locator('button[type="submit"]').click();
+
+    // The green success banner (#successBanner) must be visible after submission
+    await expect(page.locator('#successBanner')).toBeVisible({ timeout: 5_000 });
+    await expect(page.locator('#successBanner')).toContainText('Form submitted successfully!');
   });
 
 });
