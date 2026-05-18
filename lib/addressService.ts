@@ -32,7 +32,7 @@ export async function fetchAddressSuggestions(
   query: string,
   apiKey?: string
 ): Promise<StandardizedAddress[]> {
-  if (!query || query.trim().length < 3) {
+  if (!query || query.trim().length < 1) {
     return [];
   }
 
