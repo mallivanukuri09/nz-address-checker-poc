@@ -85,7 +85,7 @@ export default function Dashboard() {
         if (data.addresses && data.addresses.length > 0) {
           setSuggestionObjects(data.addresses);
           setSuggestions(data.addresses.map((addr: any) => 
-            `${addr.address_line_1}, ${addr.suburb}, ${addr.city} ${addr.postcode}`
+            addr.fullAddress || `${addr.street}, ${addr.suburb}, ${addr.city} ${addr.postcode}`
           ));
         } else {
           setSuggestions([]);
@@ -106,15 +106,15 @@ export default function Dashboard() {
   const handleSelectAddress = (index: number) => {
     const addressObj = suggestionObjects[index];
     const addressString = suggestions[index];
-    
+
     setSelectedAddress(addressString);
     setSearchAddress(addressString);
     setSuggestions([]);
     setSuggestionObjects([]);
     setSearchError('');
 
-    // Populate fields from the address object
-    setStreetAddress(addressObj.address_line_1 || '');
+    // Populate fields from the standardized address object
+    setStreetAddress(addressObj.street || '');
     setSuburb(addressObj.suburb || '');
     setCity(addressObj.city || '');
     setPostcode(addressObj.postcode || '');
