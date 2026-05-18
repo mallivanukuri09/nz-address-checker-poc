@@ -499,7 +499,7 @@ export default function Dashboard() {
               )}
               <button
                 type="submit"
-                className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium"
+                className="w-full bg-blue-600 text-white py-3 rounded-lg font-medium transition-all duration-150 ease-in-out hover:bg-blue-700 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 active:bg-blue-800 active:shadow-sm active:translate-y-[1px]"
               >
                 Submit
               </button>

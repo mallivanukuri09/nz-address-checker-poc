@@ -1,0 +1,162 @@
+
+> aioi-app@0.1.0 dev
+> next dev
+
+▲ Next.js 16.2.6 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.1.227:3000
+- Environments: .env.local
+✓ Ready in 302ms
+
+ GET / 200 in 208ms (next.js: 114ms, application-code: 93ms)
+ GET / 200 in 22ms (next.js: 2ms, application-code: 20ms)
+ GET /login 200 in 80ms (next.js: 24ms, application-code: 56ms)
+ GET /login 200 in 80ms (next.js: 38ms, application-code: 42ms)
+✓ Compiled in 37ms
+✓ Compiled in 34ms
+✓ Compiled in 66ms
+ GET / 200 in 35ms (next.js: 11ms, application-code: 24ms)
+ GET / 200 in 35ms (next.js: 22ms, application-code: 13ms)
+NZ Post API not configured — using mock data
+ GET /api/address?q=101%20Queen 200 in 71ms (next.js: 61ms, application-code: 10ms)
+NZ Post API not configured — using mock data
+ GET /api/address?q=12%20Customhouse 200 in 74ms (next.js: 72ms, application-code: 2ms)
+ GET /login 200 in 124ms (next.js: 5ms, application-code: 120ms)
+ GET /login 200 in 124ms (next.js: 32ms, application-code: 92ms)
+ GET /login 200 in 125ms (next.js: 18ms, application-code: 107ms)
+ GET /login 200 in 128ms (next.js: 45ms, application-code: 83ms)
+ GET / 200 in 80ms (next.js: 25ms, application-code: 55ms)
+ GET / 200 in 81ms (next.js: 33ms, application-code: 47ms)
+ GET / 200 in 85ms (next.js: 7ms, application-code: 78ms)
+ GET / 200 in 89ms (next.js: 46ms, application-code: 43ms)
+NZ Post API not configured — using mock data
+ GET /api/address?q=101%20Queen 200 in 7ms (next.js: 3ms, application-code: 4ms)
+NZ Post API not configured — using mock data
+ GET /api/address?q=12%20Customhouse 200 in 6ms (next.js: 3ms, application-code: 4ms)
+ GET /login 200 in 13ms (next.js: 3ms, application-code: 10ms)
+ GET /login 200 in 240ms (next.js: 8ms, application-code: 232ms)
+ GET /login 200 in 161ms (next.js: 16ms, application-code: 145ms)
+ GET /login 200 in 169ms (next.js: 55ms, application-code: 114ms)
+ GET /login 200 in 262ms (next.js: 1462µs, application-code: 261ms)
+ GET /login 200 in 235ms (next.js: 6ms, application-code: 229ms)
+ GET / 200 in 108ms (next.js: 8ms, application-code: 100ms)
+ GET / 200 in 112ms (next.js: 43ms, application-code: 69ms)
+ GET / 200 in 66ms (next.js: 17ms, application-code: 49ms)
+ GET / 200 in 23ms (next.js: 4ms, application-code: 19ms)
+ GET / 200 in 16ms (next.js: 1804µs, application-code: 14ms)
+NZ Post API not configured — using mock data
+ GET /api/address?q=101%20Queen 200 in 6ms (next.js: 1897µs, application-code: 4ms)
+NZ Post API not configured — using mock data
+ GET /api/address?q=12%20Customhouse 200 in 6ms (next.js: 3ms, application-code: 3ms)
+NZ Post API not configured — using mock data
+ GET /api/address?q=101%20Queen 200 in 3ms (next.js: 1189µs, application-code: 2ms)
+ GET /login 200 in 28ms (next.js: 15ms, application-code: 13ms)
+ GET /login 200 in 24ms (next.js: 4ms, application-code: 19ms)
+ GET /login 200 in 27ms (next.js: 1386µs, application-code: 26ms)
+ GET /login 200 in 28ms (next.js: 1816µs, application-code: 26ms)
+ GET / 200 in 16ms (next.js: 2ms, application-code: 13ms)
+ GET / 200 in 14ms (next.js: 2ms, application-code: 11ms)
+ GET / 200 in 16ms (next.js: 3ms, application-code: 13ms)
+NZ Post API not configured — using mock data
+ GET /api/address?q=12%20Customhouse 200 in 6ms (next.js: 3ms, application-code: 4ms)
+ GET /login 200 in 11ms (next.js: 3ms, application-code: 8ms)
+ GET /login 200 in 111ms (next.js: 6ms, application-code: 105ms)
+ GET /login 200 in 111ms (next.js: 18ms, application-code: 94ms)
+ GET /login 200 in 112ms (next.js: 38ms, application-code: 74ms)
+ GET /login 200 in 114ms (next.js: 49ms, application-code: 65ms)
+ GET / 200 in 111ms (next.js: 17ms, application-code: 94ms)
+ GET / 200 in 112ms (next.js: 28ms, application-code: 84ms)
+ GET / 200 in 115ms (next.js: 43ms, application-code: 72ms)
+ GET / 200 in 118ms (next.js: 53ms, application-code: 65ms)
+NZ Post API not configured — using mock data
+ GET /api/address?q=12%20Customhouse 200 in 7ms (next.js: 1433µs, application-code: 5ms)
+NZ Post API not configured — using mock data
+ GET /api/address?q=101%20Queen 200 in 4ms (next.js: 1001µs, application-code: 3ms)
+ GET /login 200 in 24ms (next.js: 13ms, application-code: 11ms)
+ GET /login 200 in 50ms (next.js: 1178µs, application-code: 49ms)
+ GET /login 200 in 53ms (next.js: 9ms, application-code: 43ms)
+ GET / 200 in 43ms (next.js: 26ms, application-code: 17ms)
+ GET / 200 in 47ms (next.js: 35ms, application-code: 12ms)
+NZ Post API not configured — using mock data
+ GET /api/address?q=12%20Customhouse 200 in 5ms (next.js: 1968µs, application-code: 3ms)
+NZ Post API not configured — using mock data
+ GET /api/address?q=101%20Queen 200 in 8ms (next.js: 6ms, application-code: 2ms)
+ GET /login 200 in 21ms (next.js: 1448µs, application-code: 20ms)
+ GET / 200 in 18ms (next.js: 9ms, application-code: 9ms)
+ GET /login 200 in 129ms (next.js: 4ms, application-code: 126ms)
+ GET /login 200 in 130ms (next.js: 14ms, application-code: 116ms)
+ GET /login 200 in 137ms (next.js: 45ms, application-code: 91ms)
+ GET /login 200 in 101ms (next.js: 23ms, application-code: 79ms)
+ GET / 200 in 131ms (next.js: 10ms, application-code: 121ms)
+ GET / 200 in 157ms (next.js: 46ms, application-code: 110ms)
+ GET / 200 in 159ms (next.js: 67ms, application-code: 92ms)
+ GET / 200 in 139ms (next.js: 64ms, application-code: 76ms)
+ GET /login 200 in 30ms (next.js: 4ms, application-code: 25ms)
+NZ Post API not configured — using mock data
+ GET /api/address?q=12%20Customhouse 200 in 4ms (next.js: 1582µs, application-code: 3ms)
+NZ Post API not configured — using mock data
+ GET /api/address?q=101%20Queen 200 in 5ms (next.js: 1192µs, application-code: 4ms)
+ GET / 200 in 9ms (next.js: 1247µs, application-code: 8ms)
+NZ Post API not configured — using mock data
+ GET /api/address?q=101%20Queen 200 in 9ms (next.js: 5ms, application-code: 4ms)
+ GET /login 200 in 28ms (next.js: 18ms, application-code: 10ms)
+ GET /login 200 in 17ms (next.js: 1350µs, application-code: 16ms)
+ GET /login 200 in 42ms (next.js: 1105µs, application-code: 41ms)
+ GET /login 200 in 26ms (next.js: 1456µs, application-code: 25ms)
+ GET / 200 in 11ms (next.js: 3ms, application-code: 8ms)
+ GET / 200 in 23ms (next.js: 12ms, application-code: 11ms)
+ GET / 200 in 34ms (next.js: 22ms, application-code: 12ms)
+NZ Post API not configured — using mock data
+ GET /api/address?q=12%20Customhouse 200 in 3ms (next.js: 1544µs, application-code: 1927µs)
+ GET /login 200 in 8ms (next.js: 1273µs, application-code: 7ms)
+ HEAD / 200 in 19ms (next.js: 1762µs, application-code: 17ms)
+ GET /login 200 in 144ms (next.js: 1438µs, application-code: 143ms)
+ GET /login 200 in 251ms (next.js: 2ms, application-code: 248ms)
+ GET / 200 in 75ms (next.js: 15ms, application-code: 60ms)
+ GET / 200 in 84ms (next.js: 32ms, application-code: 51ms)
+ GET /login 200 in 116ms (next.js: 72ms, application-code: 44ms)
+ GET /login 200 in 83ms (next.js: 51ms, application-code: 32ms)
+NZ Post API not configured — using mock data
+ GET /api/address?q=101%20Queen 200 in 5ms (next.js: 1531µs, application-code: 3ms)
+NZ Post API not configured — using mock data
+ GET /api/address?q=12%20Customhouse 200 in 11ms (next.js: 8ms, application-code: 3ms)
+ GET / 200 in 25ms (next.js: 14ms, application-code: 11ms)
+ GET / 200 in 39ms (next.js: 25ms, application-code: 14ms)
+NZ Post API not configured — using mock data
+ GET /api/address?q=12%20Customhouse 200 in 3ms (next.js: 852µs, application-code: 1705µs)
+NZ Post API not configured — using mock data
+ GET /api/address?q=101%20Queen 200 in 6ms (next.js: 3ms, application-code: 3ms)
+ GET /login 200 in 79ms (next.js: 19ms, application-code: 60ms)
+ GET /login 200 in 101ms (next.js: 57ms, application-code: 44ms)
+ GET /login 200 in 179ms (next.js: 62ms, application-code: 117ms)
+ GET /login 200 in 181ms (next.js: 71ms, application-code: 110ms)
+ GET / 200 in 36ms (next.js: 17ms, application-code: 18ms)
+ GET / 200 in 58ms (next.js: 21ms, application-code: 37ms)
+ GET / 200 in 68ms (next.js: 31ms, application-code: 38ms)
+ GET / 200 in 95ms (next.js: 78ms, application-code: 17ms)
+NZ Post API not configured — using mock data
+ GET /api/address?q=101%20Queen 200 in 4ms (next.js: 1247µs, application-code: 3ms)
+NZ Post API not configured — using mock data
+ GET /api/address?q=12%20Customhouse 200 in 3ms (next.js: 941µs, application-code: 3ms)
+NZ Post API not configured — using mock data
+ GET /api/address?q=12%20Customhouse 200 in 3ms (next.js: 1440µs, application-code: 1854µs)
+NZ Post API not configured — using mock data
+ GET /api/address?q=101%20Queen 200 in 9ms (next.js: 3ms, application-code: 5ms)
+ GET /login 200 in 28ms (next.js: 1806µs, application-code: 26ms)
+ GET / 200 in 24ms (next.js: 15ms, application-code: 9ms)
+NZ Post API not configured — using mock data
+ GET /api/address?q=101%20Queen 200 in 4ms (next.js: 1851µs, application-code: 3ms)
+ GET /login 200 in 25ms (next.js: 1528µs, application-code: 23ms)
+ GET / 200 in 14ms (next.js: 3ms, application-code: 12ms)
+NZ Post API not configured — using mock data
+ GET /api/address?q=12%20Customhouse 200 in 7ms (next.js: 3ms, application-code: 4ms)
+ GET /login 200 in 25ms (next.js: 1499µs, application-code: 23ms)
+ GET / 200 in 16ms (next.js: 4ms, application-code: 12ms)
+ GET /login 200 in 28ms (next.js: 3ms, application-code: 24ms)
+ GET / 200 in 14ms (next.js: 3ms, application-code: 10ms)
+ GET /login 200 in 15ms (next.js: 5ms, application-code: 10ms)
+ GET /login 200 in 33ms (next.js: 9ms, application-code: 24ms)
+ GET /login 200 in 29ms (next.js: 3ms, application-code: 27ms)
+ GET / 200 in 23ms (next.js: 15ms, application-code: 8ms)
+NZ Post API not configured — using mock data
+ GET /api/address?q=101%20Queen 200 in 5ms (next.js: 2ms, application-code: 3ms)
