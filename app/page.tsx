@@ -204,7 +204,9 @@ export default function Dashboard() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    // Clear both error and success states at the start
     setFormError('');
+    setFormSuccess(false);
     let hasError = false;
 
     // Validate First Name
@@ -224,6 +226,7 @@ export default function Dashboard() {
       // In search mode, validate that a valid address was selected
       if (!selectedAddress) {
         setFormError('Please select a valid address from the search results or use manual entry.');
+        setFormSuccess(false);
         return;
       }
     } else {
@@ -260,6 +263,7 @@ export default function Dashboard() {
 
     if (hasError) {
       setFormError('Please fix the errors above before submitting.');
+      setFormSuccess(false);
       return;
     }
 

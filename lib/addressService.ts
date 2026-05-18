@@ -45,7 +45,7 @@ export async function fetchAddressSuggestions(
 
   try {
     const response = await fetch(
-      `https://api.addressfinder.io/api/nz/address/autocomplete/?q=${encodeURIComponent(query)}&key=${key}&format=json`
+      `https://api.addressfinder.io/api/nz/address/autocomplete/?q=${encodeURIComponent(query)}&key=${key}&format=json&max=10`
     );
 
     if (!response.ok) {

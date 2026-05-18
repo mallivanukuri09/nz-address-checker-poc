@@ -160,3 +160,53 @@ NZ Post API not configured — using mock data
  GET / 200 in 23ms (next.js: 15ms, application-code: 8ms)
 NZ Post API not configured — using mock data
  GET /api/address?q=101%20Queen 200 in 5ms (next.js: 2ms, application-code: 3ms)
+ GET / 200 in 151ms (next.js: 81ms, application-code: 69ms)
+ GET / 200 in 19ms (next.js: 1417µs, application-code: 17ms)
+ GET /login 200 in 28ms (next.js: 17ms, application-code: 11ms)
+ GET / 200 in 23ms (next.js: 4ms, application-code: 19ms)
+Addressfinder API not configured — using mock data
+ GET /api/address?q=90%20 200 in 57ms (next.js: 48ms, application-code: 9ms)
+Addressfinder API not configured — using mock data
+ GET /api/address?q=90b 200 in 10ms (next.js: 3ms, application-code: 7ms)
+Addressfinder API not configured — using mock data
+ GET /api/address?q=90b%20 200 in 6ms (next.js: 1906µs, application-code: 4ms)
+Addressfinder API not configured — using mock data
+ GET /api/address?q=90b%20r 200 in 9ms (next.js: 3ms, application-code: 5ms)
+Addressfinder API not configured — using mock data
+ GET /api/address?q=90b%20ra 200 in 9ms (next.js: 4ms, application-code: 6ms)
+Addressfinder API not configured — using mock data
+ GET /api/address?q=90b%20ran 200 in 10ms (next.js: 5ms, application-code: 5ms)
+Addressfinder API not configured — using mock data
+ GET /api/address?q=90b%20ra 200 in 7ms (next.js: 3ms, application-code: 4ms)
+Addressfinder API not configured — using mock data
+ GET /api/address?q=90b%20r 200 in 10ms (next.js: 5ms, application-code: 4ms)
+Addressfinder API not configured — using mock data
+ GET /api/address?q=90b%20 200 in 10ms (next.js: 5ms, application-code: 6ms)
+Addressfinder API not configured — using mock data
+ GET /api/address?q=90b 200 in 10ms (next.js: 5ms, application-code: 5ms)
+Addressfinder API not configured — using mock data
+ GET /api/address?q=49%20 200 in 9ms (next.js: 5ms, application-code: 5ms)
+ GET / 200 in 27ms (next.js: 4ms, application-code: 22ms)
+ GET / 200 in 31ms (next.js: 4ms, application-code: 26ms)
+ GET / 200 in 28ms (next.js: 2ms, application-code: 26ms)
+ GET / 200 in 30ms (next.js: 3ms, application-code: 27ms)
+Addressfinder API not configured — using mock data
+ GET /api/address?q=25%20 200 in 12ms (next.js: 6ms, application-code: 6ms)
+Addressfinder API not configured — using mock data
+ GET /api/address?q=90%20 200 in 10ms (next.js: 4ms, application-code: 7ms)
+Addressfinder API not configured — using mock data
+ GET /api/address?q=90%20r 200 in 7ms (next.js: 3ms, application-code: 4ms)
+Addressfinder API not configured — using mock data
+ GET /api/address?q=90%20ra 200 in 5ms (next.js: 2ms, application-code: 3ms)
+Addressfinder API not configured — using mock data
+ GET /api/address?q=90%20ran 200 in 7ms (next.js: 3ms, application-code: 5ms)
+Addressfinder API not configured — using mock data
+ GET /api/address?q=90%20ra 200 in 7ms (next.js: 3ms, application-code: 4ms)
+Addressfinder API not configured — using mock data
+ GET /api/address?q=90%20r 200 in 7ms (next.js: 2ms, application-code: 4ms)
+Addressfinder API not configured — using mock data
+ GET /api/address?q=90%20 200 in 8ms (next.js: 3ms, application-code: 5ms)
+Addressfinder API not configured — using mock data
+ GET /api/address?q=19%20 200 in 6ms (next.js: 2ms, application-code: 4ms)
+Addressfinder API not configured — using mock data
+ GET /api/address?q=193 200 in 4ms (next.js: 1842µs, application-code: 1997µs)
