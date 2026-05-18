@@ -219,33 +219,43 @@ export default function Dashboard() {
       hasError = true;
     }
 
-    // Validate Street Address
-    if (!streetAddress) {
-      setTouchedFields(prev => new Set(prev).add('streetAddress'));
-      hasError = true;
-    }
-
-    // Validate Suburb
-    if (!suburb) {
-      setTouchedFields(prev => new Set(prev).add('suburb'));
-      hasError = true;
-    }
-
-    // Validate City
-    if (!city) {
-      setTouchedFields(prev => new Set(prev).add('city'));
-      hasError = true;
-    }
-
-    // Validate Postcode
-    if (!postcode || !postcodeRegex.test(postcode)) {
-      setTouchedFields(prev => new Set(prev).add('postcode'));
-      if (!postcode) {
-        setPostcodeError('');
-      } else if (!postcodeRegex.test(postcode)) {
-        setPostcodeError('Postcode must be exactly 4 digits');
+    // Check if user is in Search/Autocomplete mode
+    if (!showManualFields) {
+      // In search mode, validate that a valid address was selected
+      if (!selectedAddress) {
+        setFormError('Please select a valid address from the search results or use manual entry.');
+        return;
       }
-      hasError = true;
+    } else {
+      // In Manual Entry mode, validate required fields
+      // Validate Street Address
+      if (!streetAddress) {
+        setTouchedFields(prev => new Set(prev).add('streetAddress'));
+        hasError = true;
+      }
+
+      // Validate Suburb
+      if (!suburb) {
+        setTouchedFields(prev => new Set(prev).add('suburb'));
+        hasError = true;
+      }
+
+      // Validate City
+      if (!city) {
+        setTouchedFields(prev => new Set(prev).add('city'));
+        hasError = true;
+      }
+
+      // Validate Postcode
+      if (!postcode || !postcodeRegex.test(postcode)) {
+        setTouchedFields(prev => new Set(prev).add('postcode'));
+        if (!postcode) {
+          setPostcodeError('');
+        } else if (!postcodeRegex.test(postcode)) {
+          setPostcodeError('Postcode must be exactly 4 digits');
+        }
+        hasError = true;
+      }
     }
 
     if (hasError) {
