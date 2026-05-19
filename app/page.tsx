@@ -63,7 +63,7 @@ export default function Dashboard() {
       setSearchAddress(value);
       setSearchError('');
 
-      if (value.length < 3) {
+      if (value.length < 2) {
         setSuggestions([]);
         return;
       }
@@ -204,7 +204,8 @@ export default function Dashboard() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Clear both error and success states at the start
+
+    // AIRTAIGHT GUARD CLAUSE: Clear all states at the very start
     setFormError('');
     setFormSuccess(false);
     let hasError = false;
@@ -221,13 +222,15 @@ export default function Dashboard() {
       hasError = true;
     }
 
-    // Check if user is in Search/Autocomplete mode
+    // AIRTAIGHT GUARD CLAUSE: Check if user is in Search/Autocomplete mode
     if (!showManualFields) {
-      // In search mode, validate that a valid address was selected
-      if (!selectedAddress) {
+      // ABSOLUTE HALT: In search mode, validate that a valid address was selected
+      // If user has NOT clicked/selected a verified address from dropdown, HALT execution
+      // Also block if 'No matching address found' error is active
+      if (!selectedAddress || searchError) {
         setFormError('Please select a valid address from the search results or use manual entry.');
         setFormSuccess(false);
-        return;
+        return; // COMPLETE HALT - code never reaches submit pipeline
       }
     } else {
       // In Manual Entry mode, validate required fields
@@ -261,12 +264,14 @@ export default function Dashboard() {
       }
     }
 
+    // AIRTAIGHT GUARD CLAUSE: If any validation errors exist, HALT execution
     if (hasError) {
       setFormError('Please fix the errors above before submitting.');
       setFormSuccess(false);
-      return;
+      return; // COMPLETE HALT - code never reaches submit pipeline
     }
 
+    // Only reach this point if all validations pass
     // Success — show in-page success banner
     setFormSuccess(true);
   };

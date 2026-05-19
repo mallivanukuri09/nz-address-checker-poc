@@ -32,7 +32,7 @@ export async function fetchAddressSuggestions(
   query: string,
   apiKey?: string
 ): Promise<StandardizedAddress[]> {
-  if (!query || query.trim().length < 1) {
+  if (!query || query.trim().length < 2) {
     return [];
   }
 
@@ -55,6 +55,7 @@ export async function fetchAddressSuggestions(
     const data = await response.json();
 
     // Map Addressfinder response to standardized format
+    // Trust Addressfinder's own matching logic instead of client-side filtering
     if (data.completions && Array.isArray(data.completions)) {
       return data.completions.map((item: AddressfinderResponse) => ({
         fullAddress: item.matched || item.a,
