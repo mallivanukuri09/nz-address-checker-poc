@@ -8,30 +8,35 @@ export interface StandardizedAddress {
   placeId?: string;
 }
 
-// Google Places API response interface
-interface GooglePlacesPrediction {
-  description: string;
-  place_id: string;
-  structured_formatting?: {
-    main_text: string;
-    secondary_text: string;
+// Nominatim API response interface
+interface NominatimAddress {
+  place_id: number;
+  licence: string;
+  osm_type: string;
+  osm_id: number;
+  lat: string;
+  lon: string;
+  display_name: string;
+  address: {
+    house_number?: string;
+    road?: string;
+    suburb?: string;
+    city?: string;
+    town?: string;
+    postcode?: string;
+    county?: string;
+    country?: string;
   };
-}
-
-interface GooglePlacesResponse {
-  predictions?: GooglePlacesPrediction[];
-  suggestions?: any[];
-  status: string;
 }
 
 /**
  * Address Service Adapter
  * This adapter provides a clean interface for address lookup services.
- * Currently implements Google Places Autocomplete API.
+ * Currently implements OpenStreetMap Nominatim API.
  */
 
 /**
- * Fetch address suggestions from Google Places Autocomplete API
+ * Fetch address suggestions from OpenStreetMap Nominatim API
  * @param query - The search query for address lookup
  * @returns Promise<StandardizedAddress[]> - Array of standardized address objects
  */
@@ -42,44 +47,26 @@ export async function fetchAddressSuggestions(
     return [];
   }
 
-  const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY;
-
-  if (!apiKey) {
-    throw new Error('Google Maps API key is not configured');
-  }
-
   try {
     const response = await fetch(
-      `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${encodeURIComponent(query)}&components=country:nz&types=address&location=-40.9006,174.8860&radius=1000000&key=${apiKey}`
+      `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&countrycodes=nz&featuretype=settlement,street&format=json&addressdetails=1&limit=5`
     );
 
     if (!response.ok) {
-      throw new Error(`Google Places API error: ${response.status}`);
+      throw new Error(`Nominatim API error: ${response.status}`);
     }
 
-    const data: GooglePlacesResponse = await response.json();
+    const data: NominatimAddress[] = await response.json();
 
-    // Map Google Places predictions to standardized format
-    if (data.predictions && Array.isArray(data.predictions)) {
-      return data.predictions.map((prediction: GooglePlacesPrediction) => ({
-        fullAddress: prediction.description,
-        street: prediction.structured_formatting?.main_text || '',
-        suburb: prediction.structured_formatting?.secondary_text?.split(',')[0] || '',
-        city: '',
-        postcode: '',
-        placeId: prediction.place_id,
-      }));
-    }
-
-    // Handle Google Autocomplete (New) v1 endpoint response format
-    if (data.suggestions && Array.isArray(data.suggestions)) {
-      return data.suggestions.map((suggestion: any) => ({
-        fullAddress: suggestion.placePrediction?.text?.text || '',
-        street: '',
-        suburb: '',
-        city: '',
-        postcode: '',
-        placeId: suggestion.placePrediction?.placeId || '',
+    // Map Nominatim response to standardized format
+    if (Array.isArray(data)) {
+      return data.map((item: NominatimAddress) => ({
+        fullAddress: item.display_name,
+        street: item.address.road || item.address.house_number ? `${item.address.house_number || ''} ${item.address.road || ''}`.trim() : '',
+        suburb: item.address.suburb || '',
+        city: item.address.city || item.address.town || '',
+        postcode: item.address.postcode || '',
+        placeId: item.place_id.toString(),
       }));
     }
 

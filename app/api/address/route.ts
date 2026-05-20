@@ -11,13 +11,13 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    console.log('Using Google Places API for address lookup');
+    console.log('Using OpenStreetMap Nominatim API for address lookup');
     // Notice: We do not add "const" here to prevent duplicate declarations if initialized above
     const addresses = await fetchAddressSuggestions(query);
     
     return NextResponse.json({
       addresses,
-      source: 'google',
+      source: 'nominatim',
     });
   } catch (error) {
     console.error('Error fetching addresses:', error);
