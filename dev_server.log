@@ -353,3 +353,22 @@ Addressfinder API not configured — using mock data
  GET / 200 in 27ms (next.js: 7ms, application-code: 20ms)
 Addressfinder API not configured — using mock data
  GET /api/address?q=90 200 in 8ms (next.js: 3ms, application-code: 4ms)
+ GET / 200 in 40ms (next.js: 10ms, application-code: 30ms)
+ GET / 200 in 33ms (next.js: 3ms, application-code: 31ms)
+Addressfinder API not configured — using mock data
+ GET /api/address?q=90 200 in 12ms (next.js: 6ms, application-code: 6ms)
+ GET / 200 in 52ms (next.js: 10ms, application-code: 42ms)
+ GET / 200 in 24ms (next.js: 1896µs, application-code: 22ms)
+ GET / 200 in 26ms (next.js: 4ms, application-code: 22ms)
+Using Google Places API for address lookup
+Error fetching addresses: Error: Google Maps API key is not configured
+    at fetchAddressSuggestions (lib/addressService.ts:47:11)
+    at GET (app/api/address/route.ts:19:52)
+  45 |
+  46 |   if (!apiKey) {
+> 47 |     throw new Error('Google Maps API key is not configured');
+     |           ^
+  48 |   }
+  49 |
+  50 |   try {
+ GET /api/address?q=90 500 in 232ms (next.js: 4ms, application-code: 227ms)

@@ -50,7 +50,7 @@ export async function fetchAddressSuggestions(
 
   try {
     const response = await fetch(
-      `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${encodeURIComponent(query)}&components=country:nz&key=${apiKey}`
+      `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${encodeURIComponent(query)}&components=country:nz&types=address&location=-40.9006,174.8860&radius=1000000&key=${apiKey}`
     );
 
     if (!response.ok) {
