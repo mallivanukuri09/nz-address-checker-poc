@@ -19,7 +19,8 @@ interface GooglePlacesPrediction {
 }
 
 interface GooglePlacesResponse {
-  predictions: GooglePlacesPrediction[];
+  predictions?: GooglePlacesPrediction[];
+  suggestions?: any[];
   status: string;
 }
 
@@ -67,6 +68,18 @@ export async function fetchAddressSuggestions(
         city: '',
         postcode: '',
         placeId: prediction.place_id,
+      }));
+    }
+
+    // Handle Google Autocomplete (New) v1 endpoint response format
+    if (data.suggestions && Array.isArray(data.suggestions)) {
+      return data.suggestions.map((suggestion: any) => ({
+        fullAddress: suggestion.placePrediction?.text?.text || '',
+        street: '',
+        suburb: '',
+        city: '',
+        postcode: '',
+        placeId: suggestion.placePrediction?.placeId || '',
       }));
     }
 

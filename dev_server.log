@@ -342,3 +342,14 @@ Addressfinder API not configured — using mock data
  GET /api/address?q=34 200 in 8ms (next.js: 3ms, application-code: 5ms)
 Addressfinder API not configured — using mock data
  GET /api/address?q=89 200 in 7ms (next.js: 3ms, application-code: 3ms)
+ GET / 200 in 39ms (next.js: 12ms, application-code: 27ms)
+ GET / 200 in 37ms (next.js: 2ms, application-code: 35ms)
+ GET / 200 in 22ms (next.js: 2ms, application-code: 20ms)
+Addressfinder API not configured — using mock data
+ GET /api/address?q=21 200 in 9ms (next.js: 5ms, application-code: 4ms)
+Addressfinder API not configured — using mock data
+ GET /api/address?q=90 200 in 7ms (next.js: 3ms, application-code: 4ms)
+ GET / 200 in 34ms (next.js: 6ms, application-code: 28ms)
+ GET / 200 in 27ms (next.js: 7ms, application-code: 20ms)
+Addressfinder API not configured — using mock data
+ GET /api/address?q=90 200 in 8ms (next.js: 3ms, application-code: 4ms)
