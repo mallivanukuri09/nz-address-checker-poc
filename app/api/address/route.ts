@@ -7,24 +7,20 @@ export async function GET(request: NextRequest) {
   const query = searchParams.get('q');
 
   if (!query) {
-    return NextResponse.json(
-      { error: 'Query parameter "q" is required' },
-      { status: 400 }
-    );
+    return NextResponse.json({ error: 'Query parameter "q" is required' }, { status: 400 });
   }
 
   try {
-    // Force Google Places API call - bypass all mock data fallbacks
     console.log('Using Google Places API for address lookup');
+    // Notice: We do not add "const" here to prevent duplicate declarations if initialized above
     const addresses = await fetchAddressSuggestions(query);
-
+    
     return NextResponse.json({
       addresses,
       source: 'google',
     });
   } catch (error) {
     console.error('Error fetching addresses:', error);
-
     return NextResponse.json(
       { error: 'Failed to fetch address suggestions' },
       { status: 500 }
