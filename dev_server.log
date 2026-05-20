@@ -319,3 +319,26 @@ Addressfinder API not configured — using mock data
  GET /api/address?q=132%20PrincessStreet%2C%20Dunedin%20North%2C%20Dunedin%20901 200 in 8ms (next.js: 3ms, application-code: 4ms)
 Addressfinder API not configured — using mock data
  GET /api/address?q=132%20Princess%20Street%2C%20Dunedin%20North%2C%20Dunedin%20901 200 in 8ms (next.js: 3ms, application-code: 5ms)
+ GET / 200 in 49ms (next.js: 9ms, application-code: 40ms)
+Addressfinder API not configured — using mock data
+ GET /api/address?q=44 200 in 12ms (next.js: 6ms, application-code: 6ms)
+Addressfinder API not configured — using mock data
+ GET /api/address?q=443 200 in 7ms (next.js: 4ms, application-code: 3ms)
+Addressfinder API not configured — using mock data
+ GET /api/address?q=44 200 in 6ms (next.js: 3ms, application-code: 3ms)
+Addressfinder API not configured — using mock data
+ GET /api/address?q=15 200 in 6ms (next.js: 3ms, application-code: 3ms)
+Addressfinder API not configured — using mock data
+ GET /api/address?q=90 200 in 7ms (next.js: 4ms, application-code: 3ms)
+Addressfinder API not configured — using mock data
+ GET /api/address?q=24 200 in 7ms (next.js: 4ms, application-code: 3ms)
+✓ Compiled in 23ms
+✓ Compiled in 382ms
+✓ Compiled in 55ms
+✓ Compiled in 22ms
+ GET / 200 in 43ms (next.js: 9ms, application-code: 34ms)
+ GET / 200 in 31ms (next.js: 4ms, application-code: 27ms)
+Addressfinder API not configured — using mock data
+ GET /api/address?q=34 200 in 8ms (next.js: 3ms, application-code: 5ms)
+Addressfinder API not configured — using mock data
+ GET /api/address?q=89 200 in 7ms (next.js: 3ms, application-code: 3ms)

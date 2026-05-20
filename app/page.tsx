@@ -400,16 +400,19 @@ export default function Dashboard() {
               )}
               {!isApiOffline && suggestions.length > 0 && (
                 <div className="border border-gray-200 rounded-lg bg-gray-50 max-h-48 overflow-y-auto">
-                  {suggestions.map((suggestion, index) => (
-                    <button
-                      key={index}
-                      type="button"
-                      onClick={() => handleSelectAddress(index)}
-                      className="w-full text-left px-4 py-3 hover:bg-gray-100 transition-colors text-slate-900 border-b border-gray-200 last:border-b-0"
-                    >
-                      {suggestion}
-                    </button>
-                  ))}
+                  {suggestions.map((suggestion, index) => {
+                    const addressObj = suggestionObjects[index];
+                    return (
+                      <button
+                        key={addressObj?.placeId || index}
+                        type="button"
+                        onClick={() => handleSelectAddress(index)}
+                        className="w-full text-left px-4 py-3 hover:bg-gray-100 transition-colors text-slate-900 border-b border-gray-200 last:border-b-0"
+                      >
+                        {suggestion}
+                      </button>
+                    );
+                  })}
                 </div>
               )}
               {showManualFields && (

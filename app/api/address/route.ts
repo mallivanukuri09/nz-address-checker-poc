@@ -76,13 +76,13 @@ const mockAddresses: StandardizedAddress[] = [
 ];
 
 /**
- * Check if Addressfinder API key is configured.
+ * Check if Google Maps API key is configured.
  */
 function isApiConfigured(): boolean {
-  const apiKey = process.env.NEXT_PUBLIC_ADDRESSFINDER_KEY || process.env.ADDRESSFINDER_API_KEY;
+  const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY;
   return !!(
     apiKey &&
-    apiKey !== 'PASTE_YOUR_ADDRESSFINDER_API_KEY_HERE'
+    apiKey !== 'PASTE_YOUR_GOOGLE_MAPS_KEY_HERE'
   );
 }
 
@@ -114,10 +114,9 @@ export async function GET(request: NextRequest) {
     let addresses: StandardizedAddress[];
 
     if (isApiConfigured()) {
-      // Use Addressfinder API through the service adapter
-      const apiKey = process.env.NEXT_PUBLIC_ADDRESSFINDER_KEY || process.env.ADDRESSFINDER_API_KEY;
-      console.log('Using Addressfinder API for address lookup');
-      addresses = await fetchAddressSuggestions(query, apiKey);
+      // Use Google Places Autocomplete API through the service adapter
+      console.log('Using Google Places API for address lookup');
+      addresses = await fetchAddressSuggestions(query);
     } else {
       // Fallback to mock data
       console.log('Addressfinder API not configured — using mock data');
@@ -126,7 +125,7 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json({
       addresses,
-      source: isApiConfigured() ? 'addressfinder' : 'mock',
+      source: isApiConfigured() ? 'google' : 'mock',
     });
   } catch (error) {
     console.error('Error fetching addresses:', error);

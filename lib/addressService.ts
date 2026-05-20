@@ -5,64 +5,68 @@ export interface StandardizedAddress {
   suburb: string;
   city: string;
   postcode: string;
+  placeId?: string;
 }
 
-// Addressfinder API response interface
-interface AddressfinderResponse {
-  matched: string;
-  a: string; // address line 1
-  b: string; // suburb
-  c: string; // city
-  d: string; // postcode
+// Google Places API response interface
+interface GooglePlacesPrediction {
+  description: string;
+  place_id: string;
+  structured_formatting?: {
+    main_text: string;
+    secondary_text: string;
+  };
+}
+
+interface GooglePlacesResponse {
+  predictions: GooglePlacesPrediction[];
+  status: string;
 }
 
 /**
  * Address Service Adapter
  * This adapter provides a clean interface for address lookup services.
- * Currently implements Addressfinder API, but can be easily swapped to NZ Post or other providers.
+ * Currently implements Google Places Autocomplete API.
  */
 
 /**
- * Fetch address suggestions from Addressfinder API
+ * Fetch address suggestions from Google Places Autocomplete API
  * @param query - The search query for address lookup
- * @param apiKey - The Addressfinder API key (optional, will use env var if not provided)
  * @returns Promise<StandardizedAddress[]> - Array of standardized address objects
  */
 export async function fetchAddressSuggestions(
-  query: string,
-  apiKey?: string
+  query: string
 ): Promise<StandardizedAddress[]> {
   if (!query || query.trim().length < 2) {
     return [];
   }
 
-  // Use provided apiKey or fall back to environment variable
-  const key = apiKey || process.env.NEXT_PUBLIC_ADDRESSFINDER_KEY || process.env.ADDRESSFINDER_API_KEY;
+  const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY;
 
-  if (!key) {
-    throw new Error('Addressfinder API key is not configured');
+  if (!apiKey) {
+    throw new Error('Google Maps API key is not configured');
   }
 
   try {
     const response = await fetch(
-      `https://api.addressfinder.io/api/nz/address/autocomplete/?q=${encodeURIComponent(query)}&key=${key}&format=json&max=10`
+      `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${encodeURIComponent(query)}&components=country:nz&key=${apiKey}`
     );
 
     if (!response.ok) {
-      throw new Error(`Addressfinder API error: ${response.status}`);
+      throw new Error(`Google Places API error: ${response.status}`);
     }
 
-    const data = await response.json();
+    const data: GooglePlacesResponse = await response.json();
 
-    // Map Addressfinder response to standardized format
-    // Trust Addressfinder's own matching logic instead of client-side filtering
-    if (data.completions && Array.isArray(data.completions)) {
-      return data.completions.map((item: AddressfinderResponse) => ({
-        fullAddress: item.matched || item.a,
-        street: item.a || '',
-        suburb: item.b || '',
-        city: item.c || '',
-        postcode: item.d || '',
+    // Map Google Places predictions to standardized format
+    if (data.predictions && Array.isArray(data.predictions)) {
+      return data.predictions.map((prediction: GooglePlacesPrediction) => ({
+        fullAddress: prediction.description,
+        street: prediction.structured_formatting?.main_text || '',
+        suburb: prediction.structured_formatting?.secondary_text?.split(',')[0] || '',
+        city: '',
+        postcode: '',
+        placeId: prediction.place_id,
       }));
     }
 
