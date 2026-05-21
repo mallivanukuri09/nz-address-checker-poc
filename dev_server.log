@@ -1833,3 +1833,10 @@ AWS Environment variable 'ADDRESSABLE_API_KEY' missing. Using fallback mock item
 Using OpenStreetMap Nominatim API for address lookup
 AWS Environment variable 'ADDRESSABLE_API_KEY' missing. Using fallback mock items.
  GET /api/address?q=100 200 in 11ms (next.js: 6ms, application-code: 5ms)
+⚠ Found a change in next.config.ts. Restarting the server to apply the changes...
+▲ Next.js 16.2.6 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.1.227:3000
+- Environments: .env.local
+✓ Ready in 402ms
+
