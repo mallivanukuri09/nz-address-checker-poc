@@ -374,3 +374,7 @@ Error fetching addresses: Error: Google Maps API key is not configured
  GET /api/address?q=90 500 in 232ms (next.js: 4ms, application-code: 227ms)
  GET /apple-touch-icon.png 404 in 656ms (next.js: 622ms, application-code: 34ms)
  GET /apple-touch-icon-precomposed.png 404 in 666ms (next.js: 614ms, application-code: 53ms)
+[Server HMR] Update failed, full reload needed: SyntaxError: Identifier 'url' has already been declared
+    at eval (<anonymous>)
+[Server HMR] Listener error: SyntaxError: Identifier 'url' has already been declared
+    at eval (<anonymous>)
