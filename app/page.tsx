@@ -98,30 +98,37 @@ export default function Dashboard() {
     []
   );
 
-  const handleSelectAddress = (item: any) => {
+interface SelectedAddressItem {
+  id: string;
+  fullAddress: string;
+  postcode: string;
+}
+
+  const handleSelectAddress = (item: SelectedAddressItem) => {
+    if (!item || !item.fullAddress) return;
+
     isSelectingRef.current = true;
 
-    // 1. Set the main search box to include the postcode perfectly
-    const mainSearchString = `${item.fullAddress} ${item.postcode}`.trim();
-    setInputValue(mainSearchString);
-    setSelectedAddress(mainSearchString);
-    setSearchAddress(mainSearchString);
+    // 1. Immediately establish unified Search Bar display value
+    const displayAddressString = `${item.fullAddress} ${item.postcode}`.trim();
+    setInputValue(displayAddressString);
+    setSelectedAddress(displayAddressString);
+    setSearchAddress(displayAddressString);
 
-    // 2. Split the fullAddress string by commas to extract the segments
-    // Example: ["2/2 Brightside Road", " Epsom", " Auckland"]
-    const parts = item.fullAddress.split(',').map((part: string) => part.trim());
+    // 2. Safely parse individual values via strict comma boundaries
+    const addressSegments = item.fullAddress.split(',').map(segment => segment.trim());
 
-    const streetPart = parts[0] || '';
-    const suburbPart = parts[1] || '';
-    const cityPart = parts[2] || '';
+    const streetName = addressSegments[0] || '';
+    const suburbName = addressSegments[1] || '';
+    const cityName   = addressSegments[2] || '';
 
-    // 3. Directly update form sub-box state variables
-    setStreetAddress(streetPart);
-    setSuburb(suburbPart);
-    setCity(cityPart);
+    // 3. Dispatch atomic states to eliminate required field validation blockers
+    setStreetAddress(streetName);
+    setSuburb(suburbName);
+    setCity(cityName);
     setPostcode(item.postcode || '');
 
-    // Clear suggestions dropdown after selection
+    // 4. Force collapse the suggestion list frame
     setSuggestions([]);
     setSearchError('');
   };
