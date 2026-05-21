@@ -1,3 +1,5 @@
+'use client';
+
 export interface StandardizedAddress {
   fullAddress: string;
   street: string;
