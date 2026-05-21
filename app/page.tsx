@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback, useRef } from 'react';
 import { useRouter } from 'next/navigation';
+import { fetchAddressSuggestions } from '@/lib/addressService';
 
 export default function Dashboard() {
   const router = useRouter();
@@ -80,20 +81,11 @@ export default function Dashboard() {
 
       setIsSearching(true);
       try {
-        const response = await fetch(`/api/address?q=${encodeURIComponent(value)}`);
-        const data = await response.json();
+        const results = await fetchAddressSuggestions(value);
 
-        if (!response.ok) {
-          if (response.status === 500 || response.status === 0) {
-            setIsApiOffline(true);
-            throw new Error('API is offline');
-          }
-          throw new Error(data.error || 'Failed to fetch addresses');
-        }
-
-        if (data.addresses && data.addresses.length > 0) {
-          setSuggestionObjects(data.addresses);
-          setSuggestions(data.addresses.map((addr: any) => 
+        if (results.length > 0) {
+          setSuggestionObjects(results);
+          setSuggestions(results.map((addr: any) => 
             addr.fullAddress || `${addr.street}, ${addr.suburb}, ${addr.city} ${addr.postcode}`
           ));
         } else {
@@ -102,6 +94,7 @@ export default function Dashboard() {
           setSearchError('No matching address found');
         }
       } catch (error) {
+        console.error(error);
         setSuggestions([]);
         setSuggestionObjects([]);
         setSearchError('Unable to load addresses.');
@@ -438,99 +431,101 @@ export default function Dashboard() {
                   })}
                 </div>
               )}
-              {showManualFields && !formSuccess && (
+              {(showManualFields || formSuccess) && (
                 <>
-                  <div className="flex justify-between items-center mb-2">
-                    <button
-                      type="button"
-                      onClick={handleBackToSearch}
-                      className="text-sm text-blue-600 hover:text-blue-700 cursor-pointer"
-                    >
-                      Back to address search
-                    </button>
-                  </div>
+                  {showManualFields && !formSuccess && (
+                    <div className="flex justify-between items-center mb-2">
+                      <button
+                        type="button"
+                        onClick={handleBackToSearch}
+                        className="text-sm text-blue-600 hover:text-blue-700 cursor-pointer"
+                      >
+                        Back to address search
+                      </button>
+                    </div>
+                  )}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label htmlFor="streetAddress" className="block text-sm font-medium text-slate-900 mb-2">
                     Street Address <span className="text-red-600">*</span>
                   </label>
-                   <input
-                    ref={streetAddressRef}
-                    type="text"
-                    id="streetAddress"
-                    value={streetAddress}
-                    readOnly={formSuccess}
-                    onChange={(e) => handleFieldChange('streetAddress', e.target.value, setStreetAddress)}
-                    onBlur={() => handleFieldBlur('streetAddress')}
-                    maxLength={100}
-                    className={`w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors text-slate-900 placeholder-slate-400 ${
-                      highlightFields.has('streetAddress') ? 'bg-yellow-200' : ''
-                    } ${formSuccess ? 'bg-gray-50 text-gray-500 cursor-not-allowed' : ''}`}
-                    placeholder="Street address"
-                  />
-                  {touchedFields.has('streetAddress') && !streetAddress && (
-                    <p className="text-red-600 text-sm mt-1">This field is required</p>
-                  )}
-                </div>
-                <div>
-                  <label htmlFor="suburb" className="block text-sm font-medium text-slate-900 mb-2">
-                    Suburb <span className="text-red-600">*</span>
-                  </label>
-                   <input
-                    type="text"
-                    id="suburb"
-                    value={suburb}
-                    readOnly={formSuccess}
-                    onChange={(e) => handleFieldChange('suburb', e.target.value, setSuburb)}
-                    onBlur={() => handleFieldBlur('suburb')}
-                    maxLength={50}
-                    className={`w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors text-slate-900 placeholder-slate-400 ${
-                      highlightFields.has('suburb') ? 'bg-yellow-200' : ''
-                    } ${formSuccess ? 'bg-gray-50 text-gray-500 cursor-not-allowed' : ''}`}
-                    placeholder="Suburb"
-                  />
-                  {touchedFields.has('suburb') && !suburb && (
-                    <p className="text-red-600 text-sm mt-1">This field is required</p>
-                  )}
-                </div>
-                <div>
-                  <label htmlFor="city" className="block text-sm font-medium text-slate-900 mb-2">
-                    City <span className="text-red-600">*</span>
-                  </label>
-                   <input
-                    type="text"
-                    id="city"
-                    value={city}
-                    readOnly={formSuccess}
-                    onChange={(e) => handleFieldChange('city', e.target.value, setCity)}
-                    onBlur={() => handleFieldBlur('city')}
-                    maxLength={50}
-                    className={`w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors text-slate-900 placeholder-slate-400 ${
-                      highlightFields.has('city') ? 'bg-yellow-200' : ''
-                    } ${formSuccess ? 'bg-gray-50 text-gray-500 cursor-not-allowed' : ''}`}
-                    placeholder="City"
-                  />
-                  {touchedFields.has('city') && !city && (
-                    <p className="text-red-600 text-sm mt-1">This field is required</p>
-                  )}
-                </div>
-                <div>
-                  <label htmlFor="postcode" className="block text-sm font-medium text-slate-900 mb-2">
-                    Postcode <span className="text-red-600">*</span>
-                  </label>
-                   <input
-                    type="text"
-                    id="postcode"
-                    value={postcode}
-                    readOnly={formSuccess}
-                    onChange={(e) => handlePostcodeChange(e.target.value)}
-                    onBlur={() => handleFieldBlur('postcode')}
-                    maxLength={4}
-                    className={`w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors text-slate-900 placeholder-slate-400 ${
-                      highlightFields.has('postcode') ? 'bg-yellow-200' : ''
-                    } ${formSuccess ? 'bg-gray-50 text-gray-500 cursor-not-allowed' : ''}`}
-                    placeholder="Postcode"
-                  />
+                     <input
+                      ref={streetAddressRef}
+                      type="text"
+                      id="streetAddress"
+                      value={streetAddress}
+                      readOnly={formSuccess}
+                      onChange={(e) => handleFieldChange('streetAddress', e.target.value, setStreetAddress)}
+                      onBlur={() => handleFieldBlur('streetAddress')}
+                      maxLength={100}
+                      className={`w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors text-slate-900 placeholder-slate-400 ${
+                        highlightFields.has('streetAddress') ? 'bg-yellow-200' : ''
+                      } ${formSuccess ? 'bg-gray-50 text-gray-500 cursor-not-allowed' : ''}`}
+                      placeholder="Street address"
+                    />
+                   {touchedFields.has('streetAddress') && !streetAddress && (
+                     <p className="text-red-600 text-sm mt-1">This field is required</p>
+                   )}
+                 </div>
+                 <div>
+                   <label htmlFor="suburb" className="block text-sm font-medium text-slate-900 mb-2">
+                     Suburb <span className="text-red-600">*</span>
+                   </label>
+                     <input
+                      type="text"
+                      id="suburb"
+                      value={suburb}
+                      readOnly={formSuccess}
+                      onChange={(e) => handleFieldChange('suburb', e.target.value, setSuburb)}
+                      onBlur={() => handleFieldBlur('suburb')}
+                      maxLength={50}
+                      className={`w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors text-slate-900 placeholder-slate-400 ${
+                        highlightFields.has('suburb') ? 'bg-yellow-200' : ''
+                      } ${formSuccess ? 'bg-gray-50 text-gray-500 cursor-not-allowed' : ''}`}
+                      placeholder="Suburb"
+                    />
+                   {touchedFields.has('suburb') && !suburb && (
+                     <p className="text-red-600 text-sm mt-1">This field is required</p>
+                   )}
+                 </div>
+                 <div>
+                   <label htmlFor="city" className="block text-sm font-medium text-slate-900 mb-2">
+                     City <span className="text-red-600">*</span>
+                   </label>
+                     <input
+                      type="text"
+                      id="city"
+                      value={city}
+                      readOnly={formSuccess}
+                      onChange={(e) => handleFieldChange('city', e.target.value, setCity)}
+                      onBlur={() => handleFieldBlur('city')}
+                      maxLength={50}
+                      className={`w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors text-slate-900 placeholder-slate-400 ${
+                        highlightFields.has('city') ? 'bg-yellow-200' : ''
+                      } ${formSuccess ? 'bg-gray-50 text-gray-500 cursor-not-allowed' : ''}`}
+                      placeholder="City"
+                    />
+                   {touchedFields.has('city') && !city && (
+                     <p className="text-red-600 text-sm mt-1">This field is required</p>
+                   )}
+                 </div>
+                 <div>
+                   <label htmlFor="postcode" className="block text-sm font-medium text-slate-900 mb-2">
+                     Postcode <span className="text-red-600">*</span>
+                   </label>
+                     <input
+                      type="text"
+                      id="postcode"
+                      value={postcode}
+                      readOnly={formSuccess}
+                      onChange={(e) => handlePostcodeChange(e.target.value)}
+                      onBlur={() => handleFieldBlur('postcode')}
+                      maxLength={4}
+                      className={`w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors text-slate-900 placeholder-slate-400 ${
+                        highlightFields.has('postcode') ? 'bg-yellow-200' : ''
+                      } ${formSuccess ? 'bg-gray-50 text-gray-500 cursor-not-allowed' : ''}`}
+                      placeholder="Postcode"
+                    />
                   {postcodeError && (
                     <p className="text-red-600 text-sm mt-1">{postcodeError}</p>
                   )}
@@ -538,10 +533,10 @@ export default function Dashboard() {
                     <p className="text-red-600 text-sm mt-1">This field is required</p>
                   )}
                 </div>
-              </div>
+               </div>
                 </>
               )}
-              {formError && (
+               {formError && (
                 <div className="bg-red-50 border border-red-200 rounded-lg p-4">
                   <p className="text-red-600 font-medium">{formError}</p>
                 </div>
