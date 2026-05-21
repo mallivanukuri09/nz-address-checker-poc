@@ -13,10 +13,14 @@ export async function fetchAddressSuggestions(query: string): Promise<Standardiz
 
   // Optimize raw number queries (like "49") so Nominatim triggers a house number lookup index
   const cleanQuery = query.trim();
-  const searchString = /^\d+$/.test(cleanQuery) ? `${cleanQuery} ` : cleanQuery;
+  const isNumberOnly = /^\d+$/.test(cleanQuery);
+
+const searchString = isNumberOnly
+  ? `${cleanQuery} Auckland New Zealand`
+  : cleanQuery;
 
   // OpenStreetMap Nominatim API endpoint targeted strictly to New Zealand
-  const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(searchString)}&countrycodes=nz&featuretype=settlement,street&format=json&addressdetails=1&limit=5`;
+const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(searchString)}&countrycodes=nz&format=json&addressdetails=1&limit=5`;
 
   try {
     const response = await fetch(url, {
