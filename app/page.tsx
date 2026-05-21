@@ -12,8 +12,7 @@ export default function Dashboard() {
   const [searchAddress, setSearchAddress] = useState('');
   const [inputValue, setInputValue] = useState('');
   const [selectedAddress, setSelectedAddress] = useState('');
-  const [suggestions, setSuggestions] = useState<string[]>([]);
-  const [suggestionObjects, setSuggestionObjects] = useState<any[]>([]);
+  const [suggestions, setSuggestions] = useState<any[]>([]);
   const [streetAddress, setStreetAddress] = useState('');
   const [suburb, setSuburb] = useState('');
   const [city, setCity] = useState('');
@@ -57,7 +56,6 @@ export default function Dashboard() {
       } else {
         setSearchAddress('');
         setSuggestions([]);
-        setSuggestionObjects([]);
         setSearchError('');
       }
     }, 300);
@@ -84,19 +82,14 @@ export default function Dashboard() {
         const results = await fetchAddressSuggestions(value);
 
         if (results.length > 0) {
-          setSuggestionObjects(results);
-          setSuggestions(results.map((addr: any) => 
-            addr.fullAddress || `${addr.street}, ${addr.suburb}, ${addr.city} ${addr.postcode}`
-          ));
+          setSuggestions(results);
         } else {
           setSuggestions([]);
-          setSuggestionObjects([]);
           setSearchError('No matching address found');
         }
       } catch (error) {
         console.error(error);
         setSuggestions([]);
-        setSuggestionObjects([]);
         setSearchError('Unable to load addresses.');
       } finally {
         setIsSearching(false);
@@ -105,31 +98,32 @@ export default function Dashboard() {
     []
   );
 
-  const handleSelectAddress = (index: number) => {
-    const addressObj = suggestionObjects[index];
-    const addressString = suggestions[index];
-
+  const handleSelectAddress = (item: any) => {
     isSelectingRef.current = true;
-    setSelectedAddress(addressString);
-    setSearchAddress(addressString);
-    setInputValue(addressString);
+
+    // 1. Set the main search box to include the postcode perfectly
+    const mainSearchString = `${item.fullAddress} ${item.postcode}`.trim();
+    setInputValue(mainSearchString);
+    setSelectedAddress(mainSearchString);
+    setSearchAddress(mainSearchString);
+
+    // 2. Split the fullAddress string by commas to extract the segments
+    // Example: ["2/2 Brightside Road", " Epsom", " Auckland"]
+    const parts = item.fullAddress.split(',').map((part: string) => part.trim());
+
+    const streetPart = parts[0] || '';
+    const suburbPart = parts[1] || '';
+    const cityPart = parts[2] || '';
+
+    // 3. Directly update form sub-box state variables
+    setStreetAddress(streetPart);
+    setSuburb(suburbPart);
+    setCity(cityPart);
+    setPostcode(item.postcode || '');
+
+    // Clear suggestions dropdown after selection
     setSuggestions([]);
-    setSuggestionObjects([]);
     setSearchError('');
-
-    // Populate fields from the standardized address object
-    setStreetAddress(addressObj.street || '');
-    setSuburb(addressObj.suburb || '');
-    setCity(addressObj.city || '');
-    setPostcode(addressObj.postcode || '');
-
-    // Trigger highlight animation for auto-filled fields
-    setHighlightFields(new Set(['streetAddress', 'suburb', 'city', 'postcode']));
-
-    // Clear highlight after animation
-    setTimeout(() => {
-      setHighlightFields(new Set());
-    }, 1000);
   };
 
   const handleFieldBlur = (fieldName: string) => {
@@ -186,7 +180,6 @@ export default function Dashboard() {
     setSearchAddress('');
     setSelectedAddress('');
     setSuggestions([]);
-    setSuggestionObjects([]);
     setStreetAddress('');
     setSuburb('');
     setCity('');
@@ -203,7 +196,6 @@ export default function Dashboard() {
     setShowManualFields(false);
     setSearchError('');
     setSuggestions([]);
-    setSuggestionObjects([]);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -374,7 +366,7 @@ export default function Dashboard() {
                 </div>
               </div>
               {!isApiOffline && !showManualFields && (
-                <div>
+                <div className="relative">
                   <label htmlFor="searchAddress" className="block text-sm font-medium text-slate-900 mb-2">
                     Search Address <span className="text-red-600">*</span>
                   </label>
@@ -390,6 +382,43 @@ export default function Dashboard() {
                   />
                   {touchedFields.has('searchAddress') && !searchAddress && (
                     <p className="text-red-600 text-sm mt-1">This field is required</p>
+                  )}
+
+                  {suggestions && suggestions.length > 0 && (
+                    <ul
+                      style={{
+                        position: 'absolute',
+                        zIndex: 9999,
+                        backgroundColor: '#ffffff',
+                        border: '1px solid #e2e8f0',
+                        borderRadius: '0.375rem',
+                        width: '100%',
+                        boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)',
+                        margin: 0,
+                        padding: 0,
+                        listStyle: 'none'
+                      }}
+                      className="left-0 top-full mt-1"
+                    >
+                      {suggestions.map((item, index) => (
+                        <li
+                          key={item.id || `addr-${index}`}
+                          onClick={() => {
+                            console.log("Selected item:", item);
+                            handleSelectAddress(item);
+                          }}
+                          style={{
+                            padding: '12px 16px',
+                            cursor: 'pointer',
+                            color: '#1a202c',
+                            borderBottom: '1px solid #f7fafc'
+                          }}
+                          className="p-3 cursor-pointer text-gray-900 hover:bg-gray-100 block w-full text-left transition-colors"
+                        >
+                          {item.fullAddress} {item.postcode && <span style={{ fontWeight: 600, color: '#4a5568' }}>– {item.postcode}</span>}
+                        </li>
+                      ))}
+                    </ul>
                   )}
                 </div>
               )}
@@ -410,26 +439,6 @@ export default function Dashboard() {
                 >
                   Can't find your address? Enter manually
                 </p>
-              )}
-              {!isApiOffline && suggestions.length > 0 && (
-                <div className="border border-gray-200 rounded-lg bg-gray-50 max-h-48 overflow-y-auto">
-                  {suggestions.map((suggestion, index) => {
-                    const addressObj = suggestionObjects[index];
-                    return (
-                      <button
-                        key={addressObj?.placeId || index}
-                        type="button"
-                        onMouseDown={(e) => {
-                          e.preventDefault();
-                          handleSelectAddress(index);
-                        }}
-                        className="w-full text-left px-4 py-3 hover:bg-gray-100 transition-colors text-slate-900 border-b border-gray-200 last:border-b-0"
-                      >
-                        {suggestion}
-                      </button>
-                    );
-                  })}
-                </div>
               )}
               {(showManualFields || formSuccess) && (
                 <>

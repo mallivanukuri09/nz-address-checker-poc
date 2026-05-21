@@ -1,11 +1,12 @@
-'use client';
-
 export interface StandardizedAddress {
   fullAddress: string;
   street: string;
   suburb: string;
   city: string;
   postcode: string;
+  placeId?: string;
+  mainText?: string;
+  secondaryText?: string;
 }
 
 const BACKUP_MOCK_ADDRESSES: StandardizedAddress[] = [
@@ -52,25 +53,68 @@ export async function fetchAddressSuggestions(
     }
 
     const data = await response.json();
-    const suggestions = data.suggestions || data.addresses || data.predictions || data;
 
-    if (!Array.isArray(suggestions)) {
-      return BACKUP_MOCK_ADDRESSES.filter(addr =>
-        addr.fullAddress.toLowerCase().includes(query.toLowerCase())
-      );
+    // Safely ensure data is an array before mapping
+    if (!Array.isArray(data)) {
+      console.error("Backend proxy did not return an array. Received:", data);
+      // Return our backup mock data so the application still works for testing
+      return BACKUP_MOCK_ADDRESSES;
     }
 
-    return suggestions.map((item: any) => ({
-      fullAddress: item.formatted || '',
-      street: `${item.street_number || ''} ${item.street || ''}`.trim(),
-      suburb: item.locality || '',
-      city: item.city || item.region || 'New Zealand',
+    return data.map((item: any) => ({
+      fullAddress: item.fullAddress || item.description || '',
+      street: '',
+      suburb: '',
+      city: '',
       postcode: item.postcode || '',
+      placeId: item.id || item.place_id || '',
+      mainText: item.fullAddress?.split(',')[0] || '',
+      secondaryText: item.fullAddress?.split(',').slice(1).join(',').trim() || '',
     }));
   } catch (error) {
     console.error('Autocomplete API Network Error:', error);
     return BACKUP_MOCK_ADDRESSES.filter(addr =>
       addr.fullAddress.toLowerCase().includes(query.toLowerCase())
     );
+  }
+}
+
+/** Helper logic to find specific fields inside Google's address_components array */
+const getComponent = (components: any[], type: string): string => {
+  const item = components.find((c: any) => c.types.includes(type));
+  return item ? item.long_name : '';
+};
+
+/** Fetch Place Details via its place_id to get precise address_components */
+export async function fetchPlaceDetails(
+  placeId: string
+): Promise<Partial<StandardizedAddress> | null> {
+  if (!placeId) return null;
+
+  try {
+    const response = await fetch(`/api/place-details?place_id=${encodeURIComponent(placeId)}`);
+    if (!response.ok) return null;
+
+    const data = await response.json();
+    if (!data.address_components) return null;
+
+    const components = data.address_components;
+
+    const streetNumber = getComponent(components, 'street_number');
+    const route = getComponent(components, 'route');
+
+    return {
+      fullAddress: data.formatted_address || '',
+      street: `${streetNumber} ${route}`.trim(),
+      suburb: getComponent(components, 'suburb')
+        || getComponent(components, 'sublocality')
+        || getComponent(components, 'neighborhood'),
+      city: getComponent(components, 'locality')
+        || getComponent(components, 'administrative_area_level_1'),
+      postcode: getComponent(components, 'postal_code'),
+    };
+  } catch (error) {
+    console.error('Place Details Error:', error);
+    return null;
   }
 }
