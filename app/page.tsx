@@ -347,13 +347,14 @@ export default function Dashboard() {
                   <label htmlFor="firstName" className="block text-sm font-medium text-slate-900 mb-2">
                     First Name <span className="text-red-600">*</span>
                   </label>
-                  <input
+                   <input
                     type="text"
                     id="firstName"
                     value={firstName}
+                    readOnly={formSuccess}
                     onChange={(e) => handleFieldChange('firstName', e.target.value, setFirstName)}
                     onBlur={() => handleFieldBlur('firstName')}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors text-slate-900 placeholder-slate-400"
+                    className={`w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors text-slate-900 placeholder-slate-400 ${formSuccess ? 'bg-gray-50 text-gray-500 cursor-not-allowed' : ''}`}
                     placeholder="Enter first name"
                   />
                   {touchedFields.has('firstName') && !firstName && (
@@ -364,13 +365,14 @@ export default function Dashboard() {
                   <label htmlFor="lastName" className="block text-sm font-medium text-slate-900 mb-2">
                     Last Name <span className="text-red-600">*</span>
                   </label>
-                  <input
+                   <input
                     type="text"
                     id="lastName"
                     value={lastName}
+                    readOnly={formSuccess}
                     onChange={(e) => handleFieldChange('lastName', e.target.value, setLastName)}
                     onBlur={() => handleFieldBlur('lastName')}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors text-slate-900 placeholder-slate-400"
+                    className={`w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors text-slate-900 placeholder-slate-400 ${formSuccess ? 'bg-gray-50 text-gray-500 cursor-not-allowed' : ''}`}
                     placeholder="Enter last name"
                   />
                   {touchedFields.has('lastName') && !lastName && (
@@ -383,13 +385,14 @@ export default function Dashboard() {
                   <label htmlFor="searchAddress" className="block text-sm font-medium text-slate-900 mb-2">
                     Search Address <span className="text-red-600">*</span>
                   </label>
-                  <input
+                   <input
                     type="text"
                     id="searchAddress"
                     value={inputValue}
+                    readOnly={formSuccess}
                     onChange={(e) => setInputValue(e.target.value)}
                     onBlur={() => handleFieldBlur('searchAddress')}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors text-slate-900 placeholder-slate-400"
+                    className={`w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors text-slate-900 placeholder-slate-400 ${formSuccess ? 'bg-gray-50 text-gray-500 cursor-not-allowed' : ''}`}
                     placeholder="Search for an address"
                   />
                   {touchedFields.has('searchAddress') && !searchAddress && (
@@ -407,7 +410,7 @@ export default function Dashboard() {
                   <p className="text-red-600 font-medium">{searchError}</p>
                 </div>
               )}
-              {!isApiOffline && !showManualFields && (
+              {!isApiOffline && !showManualFields && !formSuccess && (
                 <p
                   onClick={handleManualEntry}
                   className="text-sm text-blue-600 hover:text-blue-700 cursor-pointer"
@@ -435,7 +438,7 @@ export default function Dashboard() {
                   })}
                 </div>
               )}
-              {showManualFields && (
+              {showManualFields && !formSuccess && (
                 <>
                   <div className="flex justify-between items-center mb-2">
                     <button
@@ -451,17 +454,18 @@ export default function Dashboard() {
                   <label htmlFor="streetAddress" className="block text-sm font-medium text-slate-900 mb-2">
                     Street Address <span className="text-red-600">*</span>
                   </label>
-                  <input
+                   <input
                     ref={streetAddressRef}
                     type="text"
                     id="streetAddress"
                     value={streetAddress}
+                    readOnly={formSuccess}
                     onChange={(e) => handleFieldChange('streetAddress', e.target.value, setStreetAddress)}
                     onBlur={() => handleFieldBlur('streetAddress')}
                     maxLength={100}
                     className={`w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors text-slate-900 placeholder-slate-400 ${
                       highlightFields.has('streetAddress') ? 'bg-yellow-200' : ''
-                    }`}
+                    } ${formSuccess ? 'bg-gray-50 text-gray-500 cursor-not-allowed' : ''}`}
                     placeholder="Street address"
                   />
                   {touchedFields.has('streetAddress') && !streetAddress && (
@@ -472,16 +476,17 @@ export default function Dashboard() {
                   <label htmlFor="suburb" className="block text-sm font-medium text-slate-900 mb-2">
                     Suburb <span className="text-red-600">*</span>
                   </label>
-                  <input
+                   <input
                     type="text"
                     id="suburb"
                     value={suburb}
+                    readOnly={formSuccess}
                     onChange={(e) => handleFieldChange('suburb', e.target.value, setSuburb)}
                     onBlur={() => handleFieldBlur('suburb')}
                     maxLength={50}
                     className={`w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors text-slate-900 placeholder-slate-400 ${
                       highlightFields.has('suburb') ? 'bg-yellow-200' : ''
-                    }`}
+                    } ${formSuccess ? 'bg-gray-50 text-gray-500 cursor-not-allowed' : ''}`}
                     placeholder="Suburb"
                   />
                   {touchedFields.has('suburb') && !suburb && (
@@ -492,16 +497,17 @@ export default function Dashboard() {
                   <label htmlFor="city" className="block text-sm font-medium text-slate-900 mb-2">
                     City <span className="text-red-600">*</span>
                   </label>
-                  <input
+                   <input
                     type="text"
                     id="city"
                     value={city}
+                    readOnly={formSuccess}
                     onChange={(e) => handleFieldChange('city', e.target.value, setCity)}
                     onBlur={() => handleFieldBlur('city')}
                     maxLength={50}
                     className={`w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors text-slate-900 placeholder-slate-400 ${
                       highlightFields.has('city') ? 'bg-yellow-200' : ''
-                    }`}
+                    } ${formSuccess ? 'bg-gray-50 text-gray-500 cursor-not-allowed' : ''}`}
                     placeholder="City"
                   />
                   {touchedFields.has('city') && !city && (
@@ -512,16 +518,17 @@ export default function Dashboard() {
                   <label htmlFor="postcode" className="block text-sm font-medium text-slate-900 mb-2">
                     Postcode <span className="text-red-600">*</span>
                   </label>
-                  <input
+                   <input
                     type="text"
                     id="postcode"
                     value={postcode}
+                    readOnly={formSuccess}
                     onChange={(e) => handlePostcodeChange(e.target.value)}
                     onBlur={() => handleFieldBlur('postcode')}
                     maxLength={4}
                     className={`w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors text-slate-900 placeholder-slate-400 ${
                       highlightFields.has('postcode') ? 'bg-yellow-200' : ''
-                    }`}
+                    } ${formSuccess ? 'bg-gray-50 text-gray-500 cursor-not-allowed' : ''}`}
                     placeholder="Postcode"
                   />
                   {postcodeError && (
@@ -541,10 +548,14 @@ export default function Dashboard() {
               )}
               <button
                 type="submit"
-                disabled={isSubmitting}
-                className={`w-full bg-blue-600 text-white py-3 rounded-lg font-medium transition-all duration-150 ease-in-out hover:bg-blue-700 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 active:bg-blue-800 active:shadow-sm active:translate-y-[1px] ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
+                disabled={isSubmitting || formSuccess}
+                className={`w-full py-3 rounded-lg font-medium transition-all duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 ${
+                  formSuccess
+                    ? 'bg-emerald-600 text-white cursor-not-allowed'
+                    : 'bg-blue-600 text-white hover:bg-blue-700 hover:shadow-md focus:ring-blue-500 focus:ring-offset-2 active:bg-blue-800 active:shadow-sm active:translate-y-[1px]'
+                } ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
-                {isSubmitting ? 'Submitting...' : 'Submit'}
+                {formSuccess ? 'Submitted ✓' : isSubmitting ? 'Submitting...' : 'Submit'}
               </button>
             </form>
           </div>

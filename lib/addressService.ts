@@ -6,64 +6,90 @@ export interface StandardizedAddress {
   postcode: string;
 }
 
+const BACKUP_MOCK_ADDRESSES: StandardizedAddress[] = [
+  {
+    fullAddress: "100 Queen Street, Auckland Central, Auckland 1010",
+    street: "100 Queen Street",
+    suburb: "Auckland Central",
+    city: "Auckland",
+    postcode: "1010"
+  },
+  {
+    fullAddress: "56 Willis Street, Wellington Central, Wellington 6011",
+    street: "56 Willis Street",
+    suburb: "Wellington Central",
+    city: "Wellington",
+    postcode: "6011"
+  },
+  {
+    fullAddress: "12 Riccarton Road, Riccarton, Christchurch 8011",
+    street: "12 Riccarton Road",
+    suburb: "Riccarton",
+    city: "Christchurch",
+    postcode: "8011"
+  }
+];
+
 export async function fetchAddressSuggestions(query: string): Promise<StandardizedAddress[]> {
   if (!query || query.trim().length === 0) {
     return [];
   }
 
-  // ⚙️ Modular API Configuration Block
-  const apiKey = "CyyOrbYFVJLXi4uOUFojxQ";
+  const apiKey = process.env.ADDRESSABLE_API_KEY;
   const countryCode = "NZ";
 
-  // 🔀 Dynamic User Input Parser
+  if (!apiKey) {
+    console.warn("AWS Environment variable 'ADDRESSABLE_API_KEY' missing. Using fallback mock items.");
+    return BACKUP_MOCK_ADDRESSES.filter(addr => 
+      addr.fullAddress.toLowerCase().includes(query.toLowerCase())
+    );
+  }
+
   const cleanQuery = query.trim();
   const searchString = /^\d+$/.test(cleanQuery) ? `${cleanQuery} ` : cleanQuery;
-
-  // 🌐 Constructed Endpoint URL using GET parameters
   const url = `https://api.addressable.dev/v2/autocomplete?api_key=${apiKey}&country_code=${countryCode}&q=${encodeURIComponent(searchString)}`;
 
   try {
     const response = await fetch(url, {
       method: 'GET',
-      headers: {
-        'Accept': 'application/json'
-      }
+      headers: { 'Accept': 'application/json' }
     });
 
     if (!response.ok) {
-      console.error(`Addressable API responded with status: ${response.status}`);
-      return [];
+      console.error(`API Error Status: ${response.status}. Initiating safety fallback rows.`);
+      return BACKUP_MOCK_ADDRESSES.filter(addr => 
+        addr.fullAddress.toLowerCase().includes(query.toLowerCase())
+      );
     }
 
     const data = await response.json();
-    
-    // Safety check: Ensure we have an array of suggestions to work with
     const suggestions = data.suggestions || data.addresses || data.predictions || data;
     
     if (!Array.isArray(suggestions)) {
-      return [];
+      return BACKUP_MOCK_ADDRESSES.filter(addr => 
+        addr.fullAddress.toLowerCase().includes(query.toLowerCase())
+      );
     }
 
-    // Map the real data dynamically into your StandardizedAddress format
     return suggestions.map((item: any) => {
+      const fullAddr = item.formatted || '';
       const street = item.street_number && item.street ? `${item.street_number} ${item.street}` : (item.street || '');
-      const suburb = item.locality || '';
-      const city = item.region || 'New Zealand';
-      const postcode = item.postcode || '';
-      const addressParts = [street, suburb, city, item.postcode].filter(Boolean);
-      const fullAddress = addressParts.join(', ') || 'New Zealand Address';
-
       return {
-        fullAddress,
-        street,
-        suburb,
-        city,
-        postcode,
+        fullAddress: fullAddr,
+        street: street,
+        suburb: item.locality || '',
+        city: item.region || 'New Zealand',
+        postcode: item.postcode || ''
       };
     });
 
   } catch (error) {
-    console.error('Failed inside fetchAddressSuggestions:', error);
-    return []; // Graceful fallback on network drop
+    console.error('Network failure detected inside fetchAddressSuggestions. Activating offline fallback:', error);
+    
+    const filteredMocks = BACKUP_MOCK_ADDRESSES.filter(addr => 
+      addr.fullAddress.toLowerCase().includes(query.toLowerCase())
+    );
+
+    return filteredMocks;
   }
 }
