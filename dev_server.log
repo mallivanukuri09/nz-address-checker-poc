@@ -1861,3 +1861,46 @@ AWS Environment variable 'ADDRESSABLE_API_KEY' missing. Using fallback mock item
 - Environments: .env.local
 ✓ Ready in 317ms
 
+⚠ Found a change in next.config.ts. Restarting the server to apply the changes...
+▲ Next.js 16.2.6 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.1.227:3000
+- Environments: .env.local
+✓ Ready in 327ms
+
+⚠ Found a change in next.config.ts. Restarting the server to apply the changes...
+▲ Next.js 16.2.6 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.1.227:3000
+- Environments: .env.local
+✓ Ready in 316ms
+
+⚠ Found a change in next.config.ts. Restarting the server to apply the changes...
+▲ Next.js 16.2.6 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.1.227:3000
+- Environments: .env.local
+✓ Ready in 316ms
+
+⚠ Found a change in next.config.ts. Restarting the server to apply the changes...
+▲ Next.js 16.2.6 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.1.227:3000
+- Environments: .env.local
+✓ Ready in 184ms
+
+⚠ Found a change in next.config.ts. Restarting the server to apply the changes...
+▲ Next.js 16.2.6 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.1.227:3000
+- Environments: .env.local
+✓ Ready in 312ms
+
+⚠ Found a change in next.config.ts. Restarting the server to apply the changes...
+▲ Next.js 16.2.6 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.1.227:3000
+- Environments: .env.local
+✓ Ready in 359ms
+
+  Reload env: .env.local
