@@ -6,18 +6,28 @@ export interface StandardizedAddress {
   postcode: string;
 }
 
-export async function fetchAddressSuggestions(
-  query: string
-): Promise<StandardizedAddress[]> {
-  const url =
-    "https://api.addressable.dev/v2/autocomplete?api_key=CyyOrbYFVJLXi4uOUFojxQ&country_code=NZ&q=5/";
+export async function fetchAddressSuggestions(query: string): Promise<StandardizedAddress[]> {
+  if (!query || query.trim().length === 0) {
+    return [];
+  }
+
+  // ⚙️ Modular API Configuration Block
+  const apiKey = "CyyOrbYFVJLXi4uOUFojxQ";
+  const countryCode = "NZ";
+
+  // 🔀 Dynamic User Input Parser
+  const cleanQuery = query.trim();
+  const searchString = /^\d+$/.test(cleanQuery) ? `${cleanQuery} ` : cleanQuery;
+
+  // 🌐 Constructed Endpoint URL using GET parameters
+  const url = `https://api.addressable.dev/v2/autocomplete?api_key=${apiKey}&country_code=${countryCode}&q=${encodeURIComponent(searchString)}`;
 
   try {
     const response = await fetch(url, {
-      method: "GET",
+      method: 'GET',
       headers: {
-        "User-Agent": "NZAddressCheckerApp/1.0 (addresschecker@example.com)",
-      },
+        'Accept': 'application/json'
+      }
     });
 
     if (!response.ok) {
@@ -26,19 +36,34 @@ export async function fetchAddressSuggestions(
     }
 
     const data = await response.json();
-    console.log("Addressable Raw Data:", data);
+    
+    // Safety check: Ensure we have an array of suggestions to work with
+    const suggestions = data.suggestions || data.addresses || data.predictions || data;
+    
+    if (!Array.isArray(suggestions)) {
+      return [];
+    }
 
-    return [
-      {
-        fullAddress: "5 Hardcoded Test Street, Auckland Central, Auckland",
-        street: "5 Test Street",
-        suburb: "Auckland Central",
-        city: "Auckland",
-        postcode: "1010",
-      },
-    ];
+    // Map the real data dynamically into your StandardizedAddress format
+    return suggestions.map((item: any) => {
+      const street = item.street_number && item.street ? `${item.street_number} ${item.street}` : (item.street || '');
+      const suburb = item.locality || '';
+      const city = item.region || 'New Zealand';
+      const postcode = item.postcode || '';
+      const addressParts = [street, suburb, city, item.postcode].filter(Boolean);
+      const fullAddress = addressParts.join(', ') || 'New Zealand Address';
+
+      return {
+        fullAddress,
+        street,
+        suburb,
+        city,
+        postcode,
+      };
+    });
+
   } catch (error) {
-    console.error("Failed inside fetchAddressSuggestions:", error);
-    return [];
+    console.error('Failed inside fetchAddressSuggestions:', error);
+    return []; // Graceful fallback on network drop
   }
 }

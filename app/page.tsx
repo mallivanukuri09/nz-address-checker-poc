@@ -9,6 +9,7 @@ export default function Dashboard() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [searchAddress, setSearchAddress] = useState('');
+  const [inputValue, setInputValue] = useState('');
   const [selectedAddress, setSelectedAddress] = useState('');
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [suggestionObjects, setSuggestionObjects] = useState<any[]>([]);
@@ -22,10 +23,12 @@ export default function Dashboard() {
   const [highlightFields, setHighlightFields] = useState<Set<string>>(new Set());
   const [postcodeError, setPostcodeError] = useState('');
   const [isApiOffline, setIsApiOffline] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [showManualFields, setShowManualFields] = useState(false);
   const [formError, setFormError] = useState('');
   const [formSuccess, setFormSuccess] = useState(false);
   const streetAddressRef = useRef<HTMLInputElement>(null);
+  const isSelectingRef = useRef(false);
 
   useEffect(() => {
     const isLoggedIn = localStorage.getItem('isLoggedIn');
@@ -42,24 +45,31 @@ export default function Dashboard() {
     }
   }, [isApiOffline, showManualFields]);
 
+  useEffect(() => {
+    if (isSelectingRef.current) {
+      isSelectingRef.current = false;
+      return;
+    }
+    const delayDebounceFn = setTimeout(() => {
+      if (inputValue) {
+        handleAddressSearch(inputValue);
+      } else {
+        setSearchAddress('');
+        setSuggestions([]);
+        setSuggestionObjects([]);
+        setSearchError('');
+      }
+    }, 300);
+    return () => clearTimeout(delayDebounceFn);
+  }, [inputValue]);
+
   const handleLogout = () => {
     localStorage.removeItem('isLoggedIn');
     router.push('/login');
   };
 
-  function debounce<T extends (...args: any[]) => any>(
-    func: T,
-    wait: number
-  ): (...args: Parameters<T>) => void {
-    let timeout: NodeJS.Timeout | null = null;
-    return (...args: Parameters<T>) => {
-      if (timeout) clearTimeout(timeout);
-      timeout = setTimeout(() => func(...args), wait);
-    };
-  }
-
   const handleAddressSearch = useCallback(
-    debounce(async (value: string) => {
+    async (value: string) => {
       setSearchAddress(value);
       setSearchError('');
 
@@ -74,7 +84,6 @@ export default function Dashboard() {
         const data = await response.json();
 
         if (!response.ok) {
-          // Check for 500 error or network failure
           if (response.status === 500 || response.status === 0) {
             setIsApiOffline(true);
             throw new Error('API is offline');
@@ -99,7 +108,7 @@ export default function Dashboard() {
       } finally {
         setIsSearching(false);
       }
-    }, 300),
+    },
     []
   );
 
@@ -107,8 +116,10 @@ export default function Dashboard() {
     const addressObj = suggestionObjects[index];
     const addressString = suggestions[index];
 
+    isSelectingRef.current = true;
     setSelectedAddress(addressString);
     setSearchAddress(addressString);
+    setInputValue(addressString);
     setSuggestions([]);
     setSuggestionObjects([]);
     setSearchError('');
@@ -204,8 +215,8 @@ export default function Dashboard() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSubmitting) return;
 
-    // AIRTAIGHT GUARD CLAUSE: Clear all states at the very start
     setFormError('');
     setFormSuccess(false);
     let hasError = false;
@@ -272,8 +283,14 @@ export default function Dashboard() {
     }
 
     // Only reach this point if all validations pass
-    // Success — show in-page success banner
-    setFormSuccess(true);
+    setIsSubmitting(true);
+    try {
+      setFormSuccess(true);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const postcodeRegex = /^\d{4}$/;
@@ -369,8 +386,8 @@ export default function Dashboard() {
                   <input
                     type="text"
                     id="searchAddress"
-                    value={searchAddress}
-                    onChange={(e) => handleAddressSearch(e.target.value)}
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
                     onBlur={() => handleFieldBlur('searchAddress')}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors text-slate-900 placeholder-slate-400"
                     placeholder="Search for an address"
@@ -406,7 +423,10 @@ export default function Dashboard() {
                       <button
                         key={addressObj?.placeId || index}
                         type="button"
-                        onClick={() => handleSelectAddress(index)}
+                        onMouseDown={(e) => {
+                          e.preventDefault();
+                          handleSelectAddress(index);
+                        }}
                         className="w-full text-left px-4 py-3 hover:bg-gray-100 transition-colors text-slate-900 border-b border-gray-200 last:border-b-0"
                       >
                         {suggestion}
@@ -521,9 +541,10 @@ export default function Dashboard() {
               )}
               <button
                 type="submit"
-                className="w-full bg-blue-600 text-white py-3 rounded-lg font-medium transition-all duration-150 ease-in-out hover:bg-blue-700 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 active:bg-blue-800 active:shadow-sm active:translate-y-[1px]"
+                disabled={isSubmitting}
+                className={`w-full bg-blue-600 text-white py-3 rounded-lg font-medium transition-all duration-150 ease-in-out hover:bg-blue-700 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 active:bg-blue-800 active:shadow-sm active:translate-y-[1px] ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
-                Submit
+                {isSubmitting ? 'Submitting...' : 'Submit'}
               </button>
             </form>
           </div>

@@ -378,3 +378,1345 @@ Error fetching addresses: Error: Google Maps API key is not configured
     at eval (<anonymous>)
 [Server HMR] Listener error: SyntaxError: Identifier 'url' has already been declared
     at eval (<anonymous>)
+ GET / 200 in 169ms (next.js: 103ms, application-code: 66ms)
+ GET / 200 in 30ms (next.js: 2ms, application-code: 28ms)
+ GET / 200 in 30ms (next.js: 15ms, application-code: 16ms)
+ GET / 200 in 77ms (next.js: 8ms, application-code: 69ms)
+ GET / 200 in 27ms (next.js: 3ms, application-code: 23ms)
+Using OpenStreetMap Nominatim API for address lookup
+Addressable Raw Data: [
+  {
+    street_number: '5/2193',
+    street: 'State Highway 5',
+    locality: 'Ohaaki',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3083',
+    meshblock: '1277201',
+    lon: '176.277996',
+    lat: '-38.508984',
+    formatted: '5/2193 State Highway 5, Ohaaki, Reporoa'
+  },
+  {
+    street_number: '5/1201',
+    street: 'State Highway 5',
+    locality: 'Tahorakurī Forest',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3384',
+    meshblock: '1277201',
+    lon: '176.203854',
+    lat: '-38.564225',
+    formatted: '5/1201 State Highway 5, Tahorakurī Forest, Reporoa'
+  },
+  {
+    street_number: '5/1627',
+    street: 'State Highway 5',
+    locality: 'Tahorakurī Forest',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3384',
+    meshblock: '1277201',
+    lon: '176.225057',
+    lat: '-38.542038',
+    formatted: '5/1627 State Highway 5, Tahorakurī Forest, Reporoa'
+  },
+  {
+    street_number: '5/1704',
+    street: 'State Highway 5',
+    locality: 'Tahorakurī Forest',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3083',
+    meshblock: '1277401',
+    lon: '176.268576',
+    lat: '-38.54972',
+    formatted: '5/1704 State Highway 5, Tahorakurī Forest, Reporoa'
+  },
+  {
+    street_number: '5/1312',
+    street: 'Highway 50',
+    locality: 'Ongaonga',
+    city: 'Ongaonga',
+    region: "Hawke's Bay",
+    postcode: '4278',
+    meshblock: '1513900',
+    lon: '176.420173',
+    lat: '-39.892504',
+    formatted: '5/1312 Highway 50, Ongaonga'
+  }
+]
+ GET /api/address?q=45 200 in 298ms (next.js: 49ms, application-code: 248ms)
+Using OpenStreetMap Nominatim API for address lookup
+Addressable Raw Data: [
+  {
+    street_number: '5/2193',
+    street: 'State Highway 5',
+    locality: 'Ohaaki',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3083',
+    meshblock: '1277201',
+    lon: '176.277996',
+    lat: '-38.508984',
+    formatted: '5/2193 State Highway 5, Ohaaki, Reporoa'
+  },
+  {
+    street_number: '5/1201',
+    street: 'State Highway 5',
+    locality: 'Tahorakurī Forest',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3384',
+    meshblock: '1277201',
+    lon: '176.203854',
+    lat: '-38.564225',
+    formatted: '5/1201 State Highway 5, Tahorakurī Forest, Reporoa'
+  },
+  {
+    street_number: '5/1627',
+    street: 'State Highway 5',
+    locality: 'Tahorakurī Forest',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3384',
+    meshblock: '1277201',
+    lon: '176.225057',
+    lat: '-38.542038',
+    formatted: '5/1627 State Highway 5, Tahorakurī Forest, Reporoa'
+  },
+  {
+    street_number: '5/1704',
+    street: 'State Highway 5',
+    locality: 'Tahorakurī Forest',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3083',
+    meshblock: '1277401',
+    lon: '176.268576',
+    lat: '-38.54972',
+    formatted: '5/1704 State Highway 5, Tahorakurī Forest, Reporoa'
+  },
+  {
+    street_number: '5/1312',
+    street: 'Highway 50',
+    locality: 'Ongaonga',
+    city: 'Ongaonga',
+    region: "Hawke's Bay",
+    postcode: '4278',
+    meshblock: '1513900',
+    lon: '176.420173',
+    lat: '-39.892504',
+    formatted: '5/1312 Highway 50, Ongaonga'
+  }
+]
+ GET /api/address?q=5%2F 200 in 107ms (next.js: 4ms, application-code: 102ms)
+Using OpenStreetMap Nominatim API for address lookup
+Addressable Raw Data: [
+  {
+    street_number: '5/2193',
+    street: 'State Highway 5',
+    locality: 'Ohaaki',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3083',
+    meshblock: '1277201',
+    lon: '176.277996',
+    lat: '-38.508984',
+    formatted: '5/2193 State Highway 5, Ohaaki, Reporoa'
+  },
+  {
+    street_number: '5/1201',
+    street: 'State Highway 5',
+    locality: 'Tahorakurī Forest',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3384',
+    meshblock: '1277201',
+    lon: '176.203854',
+    lat: '-38.564225',
+    formatted: '5/1201 State Highway 5, Tahorakurī Forest, Reporoa'
+  },
+  {
+    street_number: '5/1627',
+    street: 'State Highway 5',
+    locality: 'Tahorakurī Forest',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3384',
+    meshblock: '1277201',
+    lon: '176.225057',
+    lat: '-38.542038',
+    formatted: '5/1627 State Highway 5, Tahorakurī Forest, Reporoa'
+  },
+  {
+    street_number: '5/1704',
+    street: 'State Highway 5',
+    locality: 'Tahorakurī Forest',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3083',
+    meshblock: '1277401',
+    lon: '176.268576',
+    lat: '-38.54972',
+    formatted: '5/1704 State Highway 5, Tahorakurī Forest, Reporoa'
+  },
+  {
+    street_number: '5/1312',
+    street: 'Highway 50',
+    locality: 'Ongaonga',
+    city: 'Ongaonga',
+    region: "Hawke's Bay",
+    postcode: '4278',
+    meshblock: '1513900',
+    lon: '176.420173',
+    lat: '-39.892504',
+    formatted: '5/1312 Highway 50, Ongaonga'
+  }
+]
+ GET /api/address?q=5%2F9 200 in 113ms (next.js: 6ms, application-code: 108ms)
+Using OpenStreetMap Nominatim API for address lookup
+Addressable Raw Data: [
+  {
+    street_number: '5/2193',
+    street: 'State Highway 5',
+    locality: 'Ohaaki',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3083',
+    meshblock: '1277201',
+    lon: '176.277996',
+    lat: '-38.508984',
+    formatted: '5/2193 State Highway 5, Ohaaki, Reporoa'
+  },
+  {
+    street_number: '5/1201',
+    street: 'State Highway 5',
+    locality: 'Tahorakurī Forest',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3384',
+    meshblock: '1277201',
+    lon: '176.203854',
+    lat: '-38.564225',
+    formatted: '5/1201 State Highway 5, Tahorakurī Forest, Reporoa'
+  },
+  {
+    street_number: '5/1627',
+    street: 'State Highway 5',
+    locality: 'Tahorakurī Forest',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3384',
+    meshblock: '1277201',
+    lon: '176.225057',
+    lat: '-38.542038',
+    formatted: '5/1627 State Highway 5, Tahorakurī Forest, Reporoa'
+  },
+  {
+    street_number: '5/1704',
+    street: 'State Highway 5',
+    locality: 'Tahorakurī Forest',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3083',
+    meshblock: '1277401',
+    lon: '176.268576',
+    lat: '-38.54972',
+    formatted: '5/1704 State Highway 5, Tahorakurī Forest, Reporoa'
+  },
+  {
+    street_number: '5/1312',
+    street: 'Highway 50',
+    locality: 'Ongaonga',
+    city: 'Ongaonga',
+    region: "Hawke's Bay",
+    postcode: '4278',
+    meshblock: '1513900',
+    lon: '176.420173',
+    lat: '-39.892504',
+    formatted: '5/1312 Highway 50, Ongaonga'
+  }
+]
+ GET /api/address?q=5%2F93 200 in 84ms (next.js: 7ms, application-code: 76ms)
+Using OpenStreetMap Nominatim API for address lookup
+Addressable Raw Data: [
+  {
+    street_number: '5/2193',
+    street: 'State Highway 5',
+    locality: 'Ohaaki',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3083',
+    meshblock: '1277201',
+    lon: '176.277996',
+    lat: '-38.508984',
+    formatted: '5/2193 State Highway 5, Ohaaki, Reporoa'
+  },
+  {
+    street_number: '5/1201',
+    street: 'State Highway 5',
+    locality: 'Tahorakurī Forest',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3384',
+    meshblock: '1277201',
+    lon: '176.203854',
+    lat: '-38.564225',
+    formatted: '5/1201 State Highway 5, Tahorakurī Forest, Reporoa'
+  },
+  {
+    street_number: '5/1627',
+    street: 'State Highway 5',
+    locality: 'Tahorakurī Forest',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3384',
+    meshblock: '1277201',
+    lon: '176.225057',
+    lat: '-38.542038',
+    formatted: '5/1627 State Highway 5, Tahorakurī Forest, Reporoa'
+  },
+  {
+    street_number: '5/1704',
+    street: 'State Highway 5',
+    locality: 'Tahorakurī Forest',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3083',
+    meshblock: '1277401',
+    lon: '176.268576',
+    lat: '-38.54972',
+    formatted: '5/1704 State Highway 5, Tahorakurī Forest, Reporoa'
+  },
+  {
+    street_number: '5/1312',
+    street: 'Highway 50',
+    locality: 'Ongaonga',
+    city: 'Ongaonga',
+    region: "Hawke's Bay",
+    postcode: '4278',
+    meshblock: '1513900',
+    lon: '176.420173',
+    lat: '-39.892504',
+    formatted: '5/1312 Highway 50, Ongaonga'
+  }
+]
+ GET /api/address?q=5%2F9 200 in 80ms (next.js: 3ms, application-code: 76ms)
+Using OpenStreetMap Nominatim API for address lookup
+Addressable Raw Data: [
+  {
+    street_number: '5/2193',
+    street: 'State Highway 5',
+    locality: 'Ohaaki',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3083',
+    meshblock: '1277201',
+    lon: '176.277996',
+    lat: '-38.508984',
+    formatted: '5/2193 State Highway 5, Ohaaki, Reporoa'
+  },
+  {
+    street_number: '5/1201',
+    street: 'State Highway 5',
+    locality: 'Tahorakurī Forest',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3384',
+    meshblock: '1277201',
+    lon: '176.203854',
+    lat: '-38.564225',
+    formatted: '5/1201 State Highway 5, Tahorakurī Forest, Reporoa'
+  },
+  {
+    street_number: '5/1627',
+    street: 'State Highway 5',
+    locality: 'Tahorakurī Forest',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3384',
+    meshblock: '1277201',
+    lon: '176.225057',
+    lat: '-38.542038',
+    formatted: '5/1627 State Highway 5, Tahorakurī Forest, Reporoa'
+  },
+  {
+    street_number: '5/1704',
+    street: 'State Highway 5',
+    locality: 'Tahorakurī Forest',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3083',
+    meshblock: '1277401',
+    lon: '176.268576',
+    lat: '-38.54972',
+    formatted: '5/1704 State Highway 5, Tahorakurī Forest, Reporoa'
+  },
+  {
+    street_number: '5/1312',
+    street: 'Highway 50',
+    locality: 'Ongaonga',
+    city: 'Ongaonga',
+    region: "Hawke's Bay",
+    postcode: '4278',
+    meshblock: '1513900',
+    lon: '176.420173',
+    lat: '-39.892504',
+    formatted: '5/1312 Highway 50, Ongaonga'
+  }
+]
+ GET /api/address?q=5%2F 200 in 74ms (next.js: 2ms, application-code: 72ms)
+Using OpenStreetMap Nominatim API for address lookup
+Addressable Raw Data: [
+  {
+    street_number: '5/2193',
+    street: 'State Highway 5',
+    locality: 'Ohaaki',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3083',
+    meshblock: '1277201',
+    lon: '176.277996',
+    lat: '-38.508984',
+    formatted: '5/2193 State Highway 5, Ohaaki, Reporoa'
+  },
+  {
+    street_number: '5/1201',
+    street: 'State Highway 5',
+    locality: 'Tahorakurī Forest',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3384',
+    meshblock: '1277201',
+    lon: '176.203854',
+    lat: '-38.564225',
+    formatted: '5/1201 State Highway 5, Tahorakurī Forest, Reporoa'
+  },
+  {
+    street_number: '5/1627',
+    street: 'State Highway 5',
+    locality: 'Tahorakurī Forest',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3384',
+    meshblock: '1277201',
+    lon: '176.225057',
+    lat: '-38.542038',
+    formatted: '5/1627 State Highway 5, Tahorakurī Forest, Reporoa'
+  },
+  {
+    street_number: '5/1704',
+    street: 'State Highway 5',
+    locality: 'Tahorakurī Forest',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3083',
+    meshblock: '1277401',
+    lon: '176.268576',
+    lat: '-38.54972',
+    formatted: '5/1704 State Highway 5, Tahorakurī Forest, Reporoa'
+  },
+  {
+    street_number: '5/1312',
+    street: 'Highway 50',
+    locality: 'Ongaonga',
+    city: 'Ongaonga',
+    region: "Hawke's Bay",
+    postcode: '4278',
+    meshblock: '1513900',
+    lon: '176.420173',
+    lat: '-39.892504',
+    formatted: '5/1312 Highway 50, Ongaonga'
+  }
+]
+ GET /api/address?q=5%2F2 200 in 81ms (next.js: 3ms, application-code: 78ms)
+Using OpenStreetMap Nominatim API for address lookup
+Addressable Raw Data: [
+  {
+    street_number: '5/2193',
+    street: 'State Highway 5',
+    locality: 'Ohaaki',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3083',
+    meshblock: '1277201',
+    lon: '176.277996',
+    lat: '-38.508984',
+    formatted: '5/2193 State Highway 5, Ohaaki, Reporoa'
+  },
+  {
+    street_number: '5/1201',
+    street: 'State Highway 5',
+    locality: 'Tahorakurī Forest',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3384',
+    meshblock: '1277201',
+    lon: '176.203854',
+    lat: '-38.564225',
+    formatted: '5/1201 State Highway 5, Tahorakurī Forest, Reporoa'
+  },
+  {
+    street_number: '5/1627',
+    street: 'State Highway 5',
+    locality: 'Tahorakurī Forest',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3384',
+    meshblock: '1277201',
+    lon: '176.225057',
+    lat: '-38.542038',
+    formatted: '5/1627 State Highway 5, Tahorakurī Forest, Reporoa'
+  },
+  {
+    street_number: '5/1704',
+    street: 'State Highway 5',
+    locality: 'Tahorakurī Forest',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3083',
+    meshblock: '1277401',
+    lon: '176.268576',
+    lat: '-38.54972',
+    formatted: '5/1704 State Highway 5, Tahorakurī Forest, Reporoa'
+  },
+  {
+    street_number: '5/1312',
+    street: 'Highway 50',
+    locality: 'Ongaonga',
+    city: 'Ongaonga',
+    region: "Hawke's Bay",
+    postcode: '4278',
+    meshblock: '1513900',
+    lon: '176.420173',
+    lat: '-39.892504',
+    formatted: '5/1312 Highway 50, Ongaonga'
+  }
+]
+ GET /api/address?q=5%2F21 200 in 85ms (next.js: 4ms, application-code: 80ms)
+Using OpenStreetMap Nominatim API for address lookup
+Addressable Raw Data: [
+  {
+    street_number: '5/2193',
+    street: 'State Highway 5',
+    locality: 'Ohaaki',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3083',
+    meshblock: '1277201',
+    lon: '176.277996',
+    lat: '-38.508984',
+    formatted: '5/2193 State Highway 5, Ohaaki, Reporoa'
+  },
+  {
+    street_number: '5/1201',
+    street: 'State Highway 5',
+    locality: 'Tahorakurī Forest',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3384',
+    meshblock: '1277201',
+    lon: '176.203854',
+    lat: '-38.564225',
+    formatted: '5/1201 State Highway 5, Tahorakurī Forest, Reporoa'
+  },
+  {
+    street_number: '5/1627',
+    street: 'State Highway 5',
+    locality: 'Tahorakurī Forest',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3384',
+    meshblock: '1277201',
+    lon: '176.225057',
+    lat: '-38.542038',
+    formatted: '5/1627 State Highway 5, Tahorakurī Forest, Reporoa'
+  },
+  {
+    street_number: '5/1704',
+    street: 'State Highway 5',
+    locality: 'Tahorakurī Forest',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3083',
+    meshblock: '1277401',
+    lon: '176.268576',
+    lat: '-38.54972',
+    formatted: '5/1704 State Highway 5, Tahorakurī Forest, Reporoa'
+  },
+  {
+    street_number: '5/1312',
+    street: 'Highway 50',
+    locality: 'Ongaonga',
+    city: 'Ongaonga',
+    region: "Hawke's Bay",
+    postcode: '4278',
+    meshblock: '1513900',
+    lon: '176.420173',
+    lat: '-39.892504',
+    formatted: '5/1312 Highway 50, Ongaonga'
+  }
+]
+ GET /api/address?q=5%2F219 200 in 77ms (next.js: 5ms, application-code: 72ms)
+Using OpenStreetMap Nominatim API for address lookup
+Addressable Raw Data: [
+  {
+    street_number: '5/2193',
+    street: 'State Highway 5',
+    locality: 'Ohaaki',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3083',
+    meshblock: '1277201',
+    lon: '176.277996',
+    lat: '-38.508984',
+    formatted: '5/2193 State Highway 5, Ohaaki, Reporoa'
+  },
+  {
+    street_number: '5/1201',
+    street: 'State Highway 5',
+    locality: 'Tahorakurī Forest',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3384',
+    meshblock: '1277201',
+    lon: '176.203854',
+    lat: '-38.564225',
+    formatted: '5/1201 State Highway 5, Tahorakurī Forest, Reporoa'
+  },
+  {
+    street_number: '5/1627',
+    street: 'State Highway 5',
+    locality: 'Tahorakurī Forest',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3384',
+    meshblock: '1277201',
+    lon: '176.225057',
+    lat: '-38.542038',
+    formatted: '5/1627 State Highway 5, Tahorakurī Forest, Reporoa'
+  },
+  {
+    street_number: '5/1704',
+    street: 'State Highway 5',
+    locality: 'Tahorakurī Forest',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3083',
+    meshblock: '1277401',
+    lon: '176.268576',
+    lat: '-38.54972',
+    formatted: '5/1704 State Highway 5, Tahorakurī Forest, Reporoa'
+  },
+  {
+    street_number: '5/1312',
+    street: 'Highway 50',
+    locality: 'Ongaonga',
+    city: 'Ongaonga',
+    region: "Hawke's Bay",
+    postcode: '4278',
+    meshblock: '1513900',
+    lon: '176.420173',
+    lat: '-39.892504',
+    formatted: '5/1312 Highway 50, Ongaonga'
+  }
+]
+ GET /api/address?q=5%2F2193 200 in 94ms (next.js: 3ms, application-code: 91ms)
+Using OpenStreetMap Nominatim API for address lookup
+Addressable Raw Data: [
+  {
+    street_number: '5/2193',
+    street: 'State Highway 5',
+    locality: 'Ohaaki',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3083',
+    meshblock: '1277201',
+    lon: '176.277996',
+    lat: '-38.508984',
+    formatted: '5/2193 State Highway 5, Ohaaki, Reporoa'
+  },
+  {
+    street_number: '5/1201',
+    street: 'State Highway 5',
+    locality: 'Tahorakurī Forest',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3384',
+    meshblock: '1277201',
+    lon: '176.203854',
+    lat: '-38.564225',
+    formatted: '5/1201 State Highway 5, Tahorakurī Forest, Reporoa'
+  },
+  {
+    street_number: '5/1627',
+    street: 'State Highway 5',
+    locality: 'Tahorakurī Forest',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3384',
+    meshblock: '1277201',
+    lon: '176.225057',
+    lat: '-38.542038',
+    formatted: '5/1627 State Highway 5, Tahorakurī Forest, Reporoa'
+  },
+  {
+    street_number: '5/1704',
+    street: 'State Highway 5',
+    locality: 'Tahorakurī Forest',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3083',
+    meshblock: '1277401',
+    lon: '176.268576',
+    lat: '-38.54972',
+    formatted: '5/1704 State Highway 5, Tahorakurī Forest, Reporoa'
+  },
+  {
+    street_number: '5/1312',
+    street: 'Highway 50',
+    locality: 'Ongaonga',
+    city: 'Ongaonga',
+    region: "Hawke's Bay",
+    postcode: '4278',
+    meshblock: '1513900',
+    lon: '176.420173',
+    lat: '-39.892504',
+    formatted: '5/1312 Highway 50, Ongaonga'
+  }
+]
+ GET /api/address?q=5%2F2193%20 200 in 77ms (next.js: 4ms, application-code: 73ms)
+Using OpenStreetMap Nominatim API for address lookup
+Addressable Raw Data: [
+  {
+    street_number: '5/2193',
+    street: 'State Highway 5',
+    locality: 'Ohaaki',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3083',
+    meshblock: '1277201',
+    lon: '176.277996',
+    lat: '-38.508984',
+    formatted: '5/2193 State Highway 5, Ohaaki, Reporoa'
+  },
+  {
+    street_number: '5/1201',
+    street: 'State Highway 5',
+    locality: 'Tahorakurī Forest',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3384',
+    meshblock: '1277201',
+    lon: '176.203854',
+    lat: '-38.564225',
+    formatted: '5/1201 State Highway 5, Tahorakurī Forest, Reporoa'
+  },
+  {
+    street_number: '5/1627',
+    street: 'State Highway 5',
+    locality: 'Tahorakurī Forest',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3384',
+    meshblock: '1277201',
+    lon: '176.225057',
+    lat: '-38.542038',
+    formatted: '5/1627 State Highway 5, Tahorakurī Forest, Reporoa'
+  },
+  {
+    street_number: '5/1704',
+    street: 'State Highway 5',
+    locality: 'Tahorakurī Forest',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3083',
+    meshblock: '1277401',
+    lon: '176.268576',
+    lat: '-38.54972',
+    formatted: '5/1704 State Highway 5, Tahorakurī Forest, Reporoa'
+  },
+  {
+    street_number: '5/1312',
+    street: 'Highway 50',
+    locality: 'Ongaonga',
+    city: 'Ongaonga',
+    region: "Hawke's Bay",
+    postcode: '4278',
+    meshblock: '1513900',
+    lon: '176.420173',
+    lat: '-39.892504',
+    formatted: '5/1312 Highway 50, Ongaonga'
+  }
+]
+ GET /api/address?q=5%2F2193%208 200 in 135ms (next.js: 8ms, application-code: 127ms)
+Using OpenStreetMap Nominatim API for address lookup
+Addressable Raw Data: [
+  {
+    street_number: '5/2193',
+    street: 'State Highway 5',
+    locality: 'Ohaaki',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3083',
+    meshblock: '1277201',
+    lon: '176.277996',
+    lat: '-38.508984',
+    formatted: '5/2193 State Highway 5, Ohaaki, Reporoa'
+  },
+  {
+    street_number: '5/1201',
+    street: 'State Highway 5',
+    locality: 'Tahorakurī Forest',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3384',
+    meshblock: '1277201',
+    lon: '176.203854',
+    lat: '-38.564225',
+    formatted: '5/1201 State Highway 5, Tahorakurī Forest, Reporoa'
+  },
+  {
+    street_number: '5/1627',
+    street: 'State Highway 5',
+    locality: 'Tahorakurī Forest',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3384',
+    meshblock: '1277201',
+    lon: '176.225057',
+    lat: '-38.542038',
+    formatted: '5/1627 State Highway 5, Tahorakurī Forest, Reporoa'
+  },
+  {
+    street_number: '5/1704',
+    street: 'State Highway 5',
+    locality: 'Tahorakurī Forest',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3083',
+    meshblock: '1277401',
+    lon: '176.268576',
+    lat: '-38.54972',
+    formatted: '5/1704 State Highway 5, Tahorakurī Forest, Reporoa'
+  },
+  {
+    street_number: '5/1312',
+    street: 'Highway 50',
+    locality: 'Ongaonga',
+    city: 'Ongaonga',
+    region: "Hawke's Bay",
+    postcode: '4278',
+    meshblock: '1513900',
+    lon: '176.420173',
+    lat: '-39.892504',
+    formatted: '5/1312 Highway 50, Ongaonga'
+  }
+]
+ GET /api/address?q=5%2F2193%20 200 in 78ms (next.js: 2ms, application-code: 76ms)
+Using OpenStreetMap Nominatim API for address lookup
+Addressable Raw Data: [
+  {
+    street_number: '5/2193',
+    street: 'State Highway 5',
+    locality: 'Ohaaki',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3083',
+    meshblock: '1277201',
+    lon: '176.277996',
+    lat: '-38.508984',
+    formatted: '5/2193 State Highway 5, Ohaaki, Reporoa'
+  },
+  {
+    street_number: '5/1201',
+    street: 'State Highway 5',
+    locality: 'Tahorakurī Forest',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3384',
+    meshblock: '1277201',
+    lon: '176.203854',
+    lat: '-38.564225',
+    formatted: '5/1201 State Highway 5, Tahorakurī Forest, Reporoa'
+  },
+  {
+    street_number: '5/1627',
+    street: 'State Highway 5',
+    locality: 'Tahorakurī Forest',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3384',
+    meshblock: '1277201',
+    lon: '176.225057',
+    lat: '-38.542038',
+    formatted: '5/1627 State Highway 5, Tahorakurī Forest, Reporoa'
+  },
+  {
+    street_number: '5/1704',
+    street: 'State Highway 5',
+    locality: 'Tahorakurī Forest',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3083',
+    meshblock: '1277401',
+    lon: '176.268576',
+    lat: '-38.54972',
+    formatted: '5/1704 State Highway 5, Tahorakurī Forest, Reporoa'
+  },
+  {
+    street_number: '5/1312',
+    street: 'Highway 50',
+    locality: 'Ongaonga',
+    city: 'Ongaonga',
+    region: "Hawke's Bay",
+    postcode: '4278',
+    meshblock: '1513900',
+    lon: '176.420173',
+    lat: '-39.892504',
+    formatted: '5/1312 Highway 50, Ongaonga'
+  }
+]
+ GET /api/address?q=48 200 in 111ms (next.js: 3ms, application-code: 108ms)
+Using OpenStreetMap Nominatim API for address lookup
+Addressable Raw Data: [
+  {
+    street_number: '5/2193',
+    street: 'State Highway 5',
+    locality: 'Ohaaki',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3083',
+    meshblock: '1277201',
+    lon: '176.277996',
+    lat: '-38.508984',
+    formatted: '5/2193 State Highway 5, Ohaaki, Reporoa'
+  },
+  {
+    street_number: '5/1201',
+    street: 'State Highway 5',
+    locality: 'Tahorakurī Forest',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3384',
+    meshblock: '1277201',
+    lon: '176.203854',
+    lat: '-38.564225',
+    formatted: '5/1201 State Highway 5, Tahorakurī Forest, Reporoa'
+  },
+  {
+    street_number: '5/1627',
+    street: 'State Highway 5',
+    locality: 'Tahorakurī Forest',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3384',
+    meshblock: '1277201',
+    lon: '176.225057',
+    lat: '-38.542038',
+    formatted: '5/1627 State Highway 5, Tahorakurī Forest, Reporoa'
+  },
+  {
+    street_number: '5/1704',
+    street: 'State Highway 5',
+    locality: 'Tahorakurī Forest',
+    city: 'Reporoa',
+    region: 'Waikato',
+    postcode: '3083',
+    meshblock: '1277401',
+    lon: '176.268576',
+    lat: '-38.54972',
+    formatted: '5/1704 State Highway 5, Tahorakurī Forest, Reporoa'
+  },
+  {
+    street_number: '5/1312',
+    street: 'Highway 50',
+    locality: 'Ongaonga',
+    city: 'Ongaonga',
+    region: "Hawke's Bay",
+    postcode: '4278',
+    meshblock: '1513900',
+    lon: '176.420173',
+    lat: '-39.892504',
+    formatted: '5/1312 Highway 50, Ongaonga'
+  }
+]
+ GET /api/address?q=48%20 200 in 77ms (next.js: 3ms, application-code: 73ms)
+ GET / 200 in 50ms (next.js: 13ms, application-code: 37ms)
+Using OpenStreetMap Nominatim API for address lookup
+Addressable Raw Data: [
+  {
+    street_number: null,
+    street: '55 Arcade',
+    locality: 'Invercargill',
+    city: 'Invercargill',
+    region: 'Southland',
+    postcode: '9810',
+    meshblock: '3108100',
+    lon: '168.347756',
+    lat: '-46.411355',
+    formatted: '55 Arcade, Invercargill'
+  },
+  {
+    street_number: '55/55',
+    street: 'Armstrong Avenue',
+    locality: 'Carterton',
+    city: 'Carterton',
+    region: 'Wellington',
+    postcode: '5713',
+    meshblock: '4004834',
+    lon: '175.535242',
+    lat: '-41.020593',
+    formatted: '55/55 Armstrong Avenue, Carterton'
+  },
+  {
+    street_number: '55',
+    street: 'Broadway',
+    locality: 'Stratford',
+    city: 'Stratford',
+    region: 'Taranaki',
+    postcode: '4332',
+    meshblock: '1616300',
+    lon: '174.280842',
+    lat: '-39.330457',
+    formatted: '55 Broadway, Stratford'
+  },
+  {
+    street_number: '55',
+    street: 'Broadway',
+    locality: 'Reefton',
+    city: 'Reefton',
+    region: 'West Coast',
+    postcode: '7830',
+    meshblock: '2395200',
+    lon: '171.865867',
+    lat: '-42.119802',
+    formatted: '55 Broadway, Reefton'
+  },
+  {
+    street_number: '55',
+    street: 'Broadway',
+    locality: 'Matamata',
+    city: 'Matamata',
+    region: 'Waikato',
+    postcode: '3400',
+    meshblock: '1118700',
+    lon: '175.772691',
+    lat: '-37.809572',
+    formatted: '55 Broadway, Matamata'
+  }
+]
+ GET /api/address?q=55 200 in 142ms (next.js: 7ms, application-code: 135ms)
+Using OpenStreetMap Nominatim API for address lookup
+Addressable Raw Data: [
+  {
+    street_number: null,
+    street: '55 Arcade',
+    locality: 'Invercargill',
+    city: 'Invercargill',
+    region: 'Southland',
+    postcode: '9810',
+    meshblock: '3108100',
+    lon: '168.347756',
+    lat: '-46.411355',
+    formatted: '55 Arcade, Invercargill'
+  },
+  {
+    street_number: '55/55',
+    street: 'Armstrong Avenue',
+    locality: 'Carterton',
+    city: 'Carterton',
+    region: 'Wellington',
+    postcode: '5713',
+    meshblock: '4004834',
+    lon: '175.535242',
+    lat: '-41.020593',
+    formatted: '55/55 Armstrong Avenue, Carterton'
+  },
+  {
+    street_number: '55',
+    street: 'Broadway',
+    locality: 'Stratford',
+    city: 'Stratford',
+    region: 'Taranaki',
+    postcode: '4332',
+    meshblock: '1616300',
+    lon: '174.280842',
+    lat: '-39.330457',
+    formatted: '55 Broadway, Stratford'
+  },
+  {
+    street_number: '55',
+    street: 'Broadway',
+    locality: 'Reefton',
+    city: 'Reefton',
+    region: 'West Coast',
+    postcode: '7830',
+    meshblock: '2395200',
+    lon: '171.865867',
+    lat: '-42.119802',
+    formatted: '55 Broadway, Reefton'
+  },
+  {
+    street_number: '55',
+    street: 'Broadway',
+    locality: 'Matamata',
+    city: 'Matamata',
+    region: 'Waikato',
+    postcode: '3400',
+    meshblock: '1118700',
+    lon: '175.772691',
+    lat: '-37.809572',
+    formatted: '55 Broadway, Matamata'
+  }
+]
+ GET /api/address?q=55%20 200 in 108ms (next.js: 6ms, application-code: 103ms)
+ GET / 200 in 37ms (next.js: 8ms, application-code: 29ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=48 200 in 132ms (next.js: 6ms, application-code: 126ms)
+ GET / 200 in 38ms (next.js: 5ms, application-code: 33ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=34 200 in 106ms (next.js: 4ms, application-code: 102ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=56 200 in 94ms (next.js: 5ms, application-code: 90ms)
+ GET / 200 in 37ms (next.js: 7ms, application-code: 30ms)
+ GET / 200 in 36ms (next.js: 4ms, application-code: 31ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=23 200 in 170ms (next.js: 6ms, application-code: 164ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=%20l 200 in 113ms (next.js: 3ms, application-code: 110ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=%20lb 200 in 64ms (next.js: 3ms, application-code: 61ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=%20lbr 200 in 83ms (next.js: 4ms, application-code: 79ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=%20lb 200 in 72ms (next.js: 3ms, application-code: 69ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=%20l 200 in 70ms (next.js: 3ms, application-code: 66ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=%204 200 in 75ms (next.js: 3ms, application-code: 71ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=%2049 200 in 68ms (next.js: 3ms, application-code: 65ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=%2049%20 200 in 76ms (next.js: 4ms, application-code: 72ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=%2049%20h 200 in 84ms (next.js: 2ms, application-code: 82ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=%2049%20ho 200 in 81ms (next.js: 4ms, application-code: 77ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=%2049%20hol 200 in 176ms (next.js: 3ms, application-code: 173ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=%2049%20holb 200 in 71ms (next.js: 4ms, application-code: 67ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=%2049%20holbr 200 in 98ms (next.js: 3ms, application-code: 95ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=%2049%20holbro 200 in 65ms (next.js: 3ms, application-code: 62ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=16 200 in 100ms (next.js: 5ms, application-code: 95ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=160 200 in 65ms (next.js: 3ms, application-code: 62ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=160%20 200 in 87ms (next.js: 4ms, application-code: 83ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=160%20g 200 in 75ms (next.js: 4ms, application-code: 71ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=160%20gr 200 in 71ms (next.js: 2ms, application-code: 68ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=160%20gre 200 in 72ms (next.js: 4ms, application-code: 68ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=160%20grea 200 in 72ms (next.js: 3ms, application-code: 69ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=160%20great 200 in 92ms (next.js: 4ms, application-code: 88ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=160%20great%20 200 in 71ms (next.js: 6ms, application-code: 65ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=60 200 in 139ms (next.js: 9ms, application-code: 129ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=602 200 in 75ms (next.js: 4ms, application-code: 71ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=602%20 200 in 68ms (next.js: 4ms, application-code: 64ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=602%20g 200 in 72ms (next.js: 3ms, application-code: 69ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=602%20gr 200 in 77ms (next.js: 3ms, application-code: 73ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=602%20gre 200 in 67ms (next.js: 4ms, application-code: 62ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=602%20grea 200 in 91ms (next.js: 5ms, application-code: 86ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=602%20great 200 in 68ms (next.js: 3ms, application-code: 66ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=602%20great%20 200 in 68ms (next.js: 4ms, application-code: 64ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=602%20great%20u 200 in 70ms (next.js: 5ms, application-code: 64ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=602%20great%20 200 in 67ms (next.js: 3ms, application-code: 64ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=602%20great%20s 200 in 69ms (next.js: 4ms, application-code: 66ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=602%20great%20so 200 in 75ms (next.js: 3ms, application-code: 72ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=602%20great%20sou 200 in 72ms (next.js: 4ms, application-code: 69ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=602%20great%20sout 200 in 86ms (next.js: 4ms, application-code: 82ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=602%20great%20south 200 in 82ms (next.js: 4ms, application-code: 78ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=602%20great%20south%20 200 in 141ms (next.js: 4ms, application-code: 137ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=602%20great%20south%20r 200 in 92ms (next.js: 4ms, application-code: 88ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=602%20great%20south%20ro 200 in 83ms (next.js: 4ms, application-code: 79ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=602%20great%20south%20roa 200 in 78ms (next.js: 4ms, application-code: 74ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=602%20great%20south%20road 200 in 68ms (next.js: 3ms, application-code: 65ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=602%20great%20south%20road%20 200 in 75ms (next.js: 3ms, application-code: 71ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=602%20great%20south%20road 200 in 72ms (next.js: 3ms, application-code: 69ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=602%20great%20south%20road%2C 200 in 66ms (next.js: 3ms, application-code: 63ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=602%20great%20south%20road%2C%20 200 in 71ms (next.js: 7ms, application-code: 64ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=602%20great%20south%20road%2C%20g 200 in 67ms (next.js: 3ms, application-code: 64ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=602%20great%20south%20road%2C%20gr 200 in 69ms (next.js: 3ms, application-code: 66ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=602%20great%20south%20road%2C%20gre 200 in 66ms (next.js: 3ms, application-code: 62ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=602%20great%20south%20road%2C%20gree 200 in 71ms (next.js: 4ms, application-code: 67ms)
+✓ Compiled in 64ms
+✓ Compiled in 24ms
+✓ Compiled in 22ms
+✓ Compiled in 22ms
+✓ Compiled in 23ms
+ GET / 200 in 51ms (next.js: 10ms, application-code: 40ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=34 200 in 174ms (next.js: 6ms, application-code: 168ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=343 200 in 68ms (next.js: 3ms, application-code: 66ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=3432 200 in 79ms (next.js: 4ms, application-code: 75ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=49%20 200 in 111ms (next.js: 2ms, application-code: 109ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=49 200 in 67ms (next.js: 3ms, application-code: 64ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=49b%20 200 in 68ms (next.js: 3ms, application-code: 65ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=49b%20ho 200 in 73ms (next.js: 3ms, application-code: 70ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=49b%20hol 200 in 100ms (next.js: 6ms, application-code: 95ms)
+✓ Compiled in 46ms
+✓ Compiled in 21ms
+ GET / 200 in 39ms (next.js: 13ms, application-code: 26ms)
+ GET / 200 in 27ms (next.js: 4ms, application-code: 23ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=49%20hol 200 in 134ms (next.js: 8ms, application-code: 126ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=49%20ho 200 in 75ms (next.js: 3ms, application-code: 71ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=49 200 in 72ms (next.js: 6ms, application-code: 66ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=49b%20h 200 in 84ms (next.js: 1787µs, application-code: 82ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=49b%20hol 200 in 68ms (next.js: 2ms, application-code: 66ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=49B%20Holbrook%20Street%2C%20Blockhouse%20Bay%2C%20Auckland%2C%200600 200 in 83ms (next.js: 3ms, application-code: 80ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=49D%20Holbrook%20Street%2C%20Blockhouse%20Bay%2C%20Auckland%2C%200600 200 in 107ms (next.js: 5ms, application-code: 103ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=49 200 in 103ms (next.js: 3ms, application-code: 99ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=49b 200 in 74ms (next.js: 3ms, application-code: 71ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=49b%20 200 in 79ms (next.js: 4ms, application-code: 75ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=90 200 in 91ms (next.js: 4ms, application-code: 88ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=90b%20 200 in 76ms (next.js: 3ms, application-code: 73ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=90b%20r 200 in 97ms (next.js: 4ms, application-code: 92ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=90b%20ran 200 in 88ms (next.js: 3ms, application-code: 85ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=90b%20ranfu 200 in 76ms (next.js: 4ms, application-code: 71ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=90b%20ranfur 200 in 69ms (next.js: 3ms, application-code: 66ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=90b%20ranfurl 200 in 92ms (next.js: 4ms, application-code: 88ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=90b%20rarfurly%20 200 in 75ms (next.js: 4ms, application-code: 71ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=90b%20rarfurly%20r 200 in 76ms (next.js: 3ms, application-code: 73ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=90b%20ra 200 in 78ms (next.js: 3ms, application-code: 75ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=90b%20ran 200 in 76ms (next.js: 4ms, application-code: 72ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=90b%20ranfur 200 in 74ms (next.js: 4ms, application-code: 71ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=2%2F 200 in 111ms (next.js: 5ms, application-code: 107ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=2%2F90 200 in 102ms (next.js: 3ms, application-code: 99ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=2%2F90%20 200 in 82ms (next.js: 1999µs, application-code: 80ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=2%2F90%20r 200 in 98ms (next.js: 4ms, application-code: 94ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=2%2F90%20ran 200 in 77ms (next.js: 3ms, application-code: 74ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=2%2F90%20ranfur 200 in 75ms (next.js: 4ms, application-code: 71ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=2%2F90%20Ranfurly%20Road%2C%20Epsom%2C%20Auckland%2C%201023 200 in 84ms (next.js: 4ms, application-code: 81ms)
+✓ Compiled in 39ms
+✓ Compiled in 23ms
+✓ Compiled in 20ms
+✓ Compiled in 19ms
+ GET / 200 in 32ms (next.js: 4ms, application-code: 28ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=34 200 in 183ms (next.js: 4ms, application-code: 179ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=602 200 in 154ms (next.js: 3ms, application-code: 151ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=602%20 200 in 67ms (next.js: 2ms, application-code: 65ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=602%20greats 200 in 72ms (next.js: 3ms, application-code: 69ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=602%20great 200 in 101ms (next.js: 4ms, application-code: 98ms)
+✓ Compiled in 38ms
+✓ Compiled in 23ms
+✓ Compiled in 23ms
+✓ Compiled in 55ms
+ GET / 200 in 40ms (next.js: 6ms, application-code: 34ms)
+ GET / 200 in 27ms (next.js: 3ms, application-code: 24ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=wrwe 200 in 124ms (next.js: 4ms, application-code: 120ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=2%2F 200 in 130ms (next.js: 3ms, application-code: 127ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=2%2F90 200 in 81ms (next.js: 3ms, application-code: 78ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=2%2F90%20 200 in 74ms (next.js: 2ms, application-code: 72ms)
+ GET / 200 in 23ms (next.js: 3ms, application-code: 20ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=2%2F 200 in 112ms (next.js: 4ms, application-code: 107ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=2%2F2 200 in 82ms (next.js: 2ms, application-code: 80ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=2%2F2%20 200 in 88ms (next.js: 3ms, application-code: 85ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=2%2F2%20b 200 in 99ms (next.js: 6ms, application-code: 93ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=2%2F2%20br 200 in 89ms (next.js: 4ms, application-code: 85ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=2%2F2%20bri 200 in 73ms (next.js: 3ms, application-code: 70ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=2%2F2%20brigh 200 in 83ms (next.js: 6ms, application-code: 76ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=2%2F2%20bright 200 in 65ms (next.js: 3ms, application-code: 62ms)
+Using OpenStreetMap Nominatim API for address lookup
+ GET /api/address?q=2%2F2%20brights 200 in 71ms (next.js: 3ms, application-code: 68ms)
