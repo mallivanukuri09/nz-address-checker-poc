@@ -13,14 +13,14 @@ interface AddressComponent {
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const query = searchParams.get('q');
-  const apiKey = process.env.GOOGLE_MAPS_API_KEY;
+  const apiKey = process.env.MAPS_API_KEY;
 
   if (!query || query.trim().length === 0) {
     return NextResponse.json([]);
   }
 
   if (!apiKey) {
-    console.error("Production Error: GOOGLE_MAPS_API_KEY is missing from environment variables.");
+    console.error("Production Error: MAPS_API_KEY is missing from environment variables.");
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }
 
