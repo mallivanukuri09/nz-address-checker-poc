@@ -15,17 +15,16 @@ export async function GET(request: Request) {
   const query = searchParams.get('q');
   const apiKey = process.env.GOOGLE_MAPS_API_KEY;
 
+  if (!query || query.trim().length === 0) {
+    return NextResponse.json([]);
+  }
+
   if (!apiKey) {
     console.error("Production Error: GOOGLE_MAPS_API_KEY is missing from environment variables.");
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }
 
-  if (!query || query.trim().length === 0) {
-    return NextResponse.json([]);
-  }
-
   try {
-    // 1. Fetch suggestions from Google Autocomplete with address component filtering
     const autocompleteUrl = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${encodeURIComponent(query)}&components=country:nz&types=address&key=${apiKey}`;
     const autocompleteRes = await fetch(autocompleteUrl);
     const autocompleteData = await autocompleteRes.json();
@@ -39,11 +38,10 @@ export async function GET(request: Request) {
       return NextResponse.json([]);
     }
 
-    // 2. Run concurrent background lookups to capture the missing postcodes immediately
+    // Cleaned up map loop with no overlapping lines
     const detailedPredictions = await Promise.all(
       autocompleteData.predictions.slice(0, 5).map(async (prediction: GooglePrediction) => {
         let postcode = '';
-        
         try {
           const detailsUrl = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${prediction.place_id}&fields=address_component&key=${apiKey}`;
           const detailsRes = await fetch(detailsUrl);
@@ -61,7 +59,6 @@ export async function GET(request: Request) {
           console.error(`Failed background details postcode lookup for ${prediction.place_id}:`, e);
         }
 
-        // Clean up the country suffix from the full string
         const cleanAddress = prediction.description.replace(/, New Zealand$/i, '');
 
         return {
